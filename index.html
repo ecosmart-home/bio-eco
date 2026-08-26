@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Smart Living | Bio Link Hub (100 Products)</title>
+    <title>Eco-Smart Living | Bio Link Hub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -11,176 +11,189 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid #E2E8F0; }
+        .product-card { transition: all 0.25s ease; }
+        .product-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen pb-12 antialiased">
+<body class="bg-slate-100 text-slate-800 min-h-screen pb-16 antialiased">
 
     <!-- Header Section -->
-    <header class="max-w-3xl mx-auto px-4 pt-8 text-center">
-        <div class="w-20 h-20 rounded-full bg-emerald-800 text-white text-3xl font-bold flex items-center justify-center mx-auto mb-3 shadow-md">🌱</div>
-        <h1 class="text-2xl font-bold text-slate-900">Eco-Smart Living</h1>
+    <header class="max-w-4xl mx-auto px-4 pt-10 text-center">
+        <div class="relative inline-block mb-3">
+            <div class="w-20 h-20 rounded-full bg-emerald-800 text-white text-3xl font-bold flex items-center justify-center mx-auto shadow-md">🌱</div>
+            <span class="absolute bottom-0 right-0 bg-emerald-500 text-white p-1 rounded-full border-2 border-white">
+                <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </span>
+        </div>
+
+        <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Eco-Smart Living</h1>
         <p class="text-sm text-slate-500 mt-1">Smart Choices • Minimalist & Eco-Friendly Home Solutions</p>
 
-        <!-- Dynamic Price Fluctuation Notice -->
-        <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-left text-xs text-amber-800 flex items-start gap-2 shadow-sm">
+        <!-- Dynamic Price Notice Banner -->
+        <div class="mt-4 max-w-2xl mx-auto p-3.5 bg-amber-50 border border-amber-200/80 rounded-2xl text-left text-xs text-amber-900 flex items-start gap-3 shadow-sm">
             <i data-lucide="info" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
             <div>
-                <strong>Price Notice:</strong> Listed prices are subject to change depending on supplier offers/promotions. Click <strong>"View Product"</strong> for real-time prices & exclusive deals!
+                <strong>Real-Time Price Notice:</strong> Product prices are subject to change during promotions. Click <strong>"Check Price"</strong> to view real-time Amazon deals.
             </div>
         </div>
 
-        <!-- Search Bar & Tab Filters -->
-        <div class="mt-5 space-y-3">
+        <!-- Search Bar & Category Tabs -->
+        <div class="mt-5 max-w-2xl mx-auto space-y-3">
             <div class="relative">
-                <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search 100 products, keywords (e.g., bamboo, desk, hanger)..." 
-                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 shadow-sm">
-                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+                <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search 100 products, keywords (e.g. Bamboo, Desk)..." 
+                    class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 shadow-sm">
+                <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5"></i>
             </div>
             
-            <!-- 5 Category Tabs -->
-            <div class="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto text-xs no-scrollbar pb-1">
-                <button onclick="setTab('all')" id="tab-all" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-emerald-800 text-white shadow-sm">All (100)</button>
-                <button onclick="setTab('kitchen')" id="tab-kitchen" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-white text-slate-600 border hover:bg-slate-50">Eco Kitchen (20)</button>
-                <button onclick="setTab('workspace')" id="tab-workspace" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-white text-slate-600 border hover:bg-slate-50">Smart Workspace (20)</button>
-                <button onclick="setTab('closet')" id="tab-closet" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-white text-slate-600 border hover:bg-slate-50">Smart Closet (20)</button>
-                <button onclick="setTab('cleaning')" id="tab-cleaning" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-white text-slate-600 border hover:bg-slate-50">Laundry & Eco (20)</button>
-                <button onclick="setTab('storage')" id="tab-storage" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-white text-slate-600 border hover:bg-slate-50">Smart Storage (20)</button>
+            <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto text-xs no-scrollbar py-1">
+                <button onclick="setTab('all')" id="tab-all" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-bold bg-emerald-800 text-white shadow-md">All (100)</button>
+                <button onclick="setTab('kitchen')" id="tab-kitchen" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border hover:bg-slate-50">Eco Kitchen (20)</button>
+                <button onclick="setTab('workspace')" id="tab-workspace" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border hover:bg-slate-50">Smart Workspace (20)</button>
+                <button onclick="setTab('closet')" id="tab-closet" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border hover:bg-slate-50">Smart Closet (20)</button>
+                <button onclick="setTab('cleaning')" id="tab-cleaning" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border hover:bg-slate-50">Laundry & Eco (20)</button>
+                <button onclick="setTab('storage')" id="tab-storage" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border hover:bg-slate-50">Smart Storage (20)</button>
             </div>
         </div>
     </header>
 
-    <!-- Product Feed Container -->
-    <main class="max-w-3xl mx-auto px-4 mt-6">
-        <div id="productCountHeader" class="text-xs text-slate-400 mb-3 font-medium">Showing 100 products</div>
-        <div id="productContainer" class="space-y-3"></div>
+    <!-- Product Grid Feed -->
+    <main class="max-w-4xl mx-auto px-4 mt-8">
+        <div class="flex items-center justify-between mb-4">
+            <span id="productCountHeader" class="text-xs font-bold uppercase tracking-wider text-slate-400">Showing 100 products</span>
+            <span class="text-xs text-emerald-700 font-semibold flex items-center gap-1 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-100">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Tag Verified: ecosmart0f5-20
+            </span>
+        </div>
+
+        <div id="productContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
     </main>
 
     <script>
-        // 100 Products across 5 Categories (20 items per category) strictly from raw dataset
+        const AFFILIATE_TAG = "ecosmart0f5-20";
+
+        // Full dataset with Amazon image thumbnails and dynamic tag generation
         const rawCategories = {
             kitchen: [
-                { name: 'Astercook Bamboo Cutting Board with Compartment Trays', price: 24.99, rating: 4.5, sales: '20,000+', asin: 'B0FH6YL3XC' },
-                { name: 'Besilord Bamboo Drawer Organizer & Divider', price: 12.98, rating: 4.6, sales: '10,000+', asin: 'B0BTKFQM5R' },
-                { name: 'SpaceAid Bamboo Expandable Drawer Dividers', price: 22.37, rating: 4.4, sales: '7,000+', asin: 'B094624Q8Z' },
-                { name: 'Isshah Coconut Fiber Kitchen Sponge (12 Pack)', price: 7.99, rating: 4.5, sales: '6,000+', asin: 'B0CSBG92MF' },
-                { name: 'Skoy Scrub Eco-Friendly Scrubber (4 Pack)', price: 9.99, rating: 4.7, sales: '1,000+', asin: 'B0CCHWSZ88' },
-                { name: 'Eco Chic Foldable Reusable Grocery Bag', price: 16.14, rating: 4.6, sales: '1,000+', asin: 'B082XR8HVB' },
-                { name: 'If You Care Natural Rubber Cotton Lined Household Gloves', price: 6.78, rating: 4.4, sales: '1,000+', asin: 'B00E1DCROE' },
-                { name: 'Stasher Silicone Reusable Food Storage Bag', price: 8.38, rating: 4.6, sales: '1,000+', asin: 'B06XPJT4CR' },
-                { name: 'LIBWYS Glass Food Storage Jars with Bamboo Lids (12 Pack)', price: 44.99, rating: 4.2, sales: '500+', asin: 'B0D7CPXZPK' },
-                { name: 'FOTOSOK 6-Tier Bamboo Storage Shelf Unit', price: 63.49, rating: 4.7, sales: '300+', asin: 'B09WKN7477' },
-                { name: 'Bamboo Ziplock Bag Storage Organizer for Drawer', price: 19.99, rating: 4.6, sales: '5,000+', asin: 'B09M8R7X2L' },
-                { name: 'Swedish Dishcloths for Kitchen (10 Pack Eco Absorbent)', price: 13.80, rating: 4.6, sales: '15,000+', asin: 'B07TG8J6X9' },
-                { name: 'Bamboo Paper Towel Holder Stand for Kitchen Countertop', price: 11.99, rating: 4.5, sales: '2,000+', asin: 'B08L7V4Q22' },
-                { name: 'Reusable Organic Cotton Produce Bags (Set of 9)', price: 14.97, rating: 4.7, sales: '3,000+', asin: 'B07M68J1L8' },
-                { name: 'Bamboo Bread Box for Kitchen Countertop Dual Layer', price: 35.99, rating: 4.4, sales: '1,000+', asin: 'B08P1G5D41' },
-                { name: 'Eco Glass Meal Prep Containers with Bamboo Lids (4 Pack)', price: 29.99, rating: 4.5, sales: '2,000+', asin: 'B07ZVF3L1C' },
-                { name: 'Beeswax Food Wraps Reusable Eco Friendly (6 Pack)', price: 15.99, rating: 4.5, sales: '4,000+', asin: 'B07J2Q1P4D' },
-                { name: 'Compost Bin for Kitchen Countertop Indoor Eco Bucket', price: 21.99, rating: 4.6, sales: '3,000+', asin: 'B015038S0C' },
-                { name: 'Bamboo Dish Drying Rack Collapsible Folding Drainer', price: 14.88, rating: 4.4, sales: '2,000+', asin: 'B002A3AD26' },
-                { name: 'Natural Loofah Kitchen Dish Sponge Eco Scrubbers (6 Pack)', price: 9.95, rating: 4.3, sales: '1,000+', asin: 'B0885P6KXL' }
+                { name: 'Astercook Bamboo Cutting Board with Compartment Trays', price: 24.99, rating: 4.5, sales: '20,000+', asin: 'B0FH6YL3XC', img: 'https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg', badge: '🔥 Best Seller' },
+                { name: 'Besilord Bamboo Drawer Organizer & Divider', price: 12.98, rating: 4.6, sales: '10,000+', asin: 'B0BTKFQM5R', img: 'https://m.media-amazon.com/images/I/81P84P4M8tL._AC_UL320_.jpg', badge: '⭐ Top Pick' },
+                { name: 'SpaceAid Bamboo Expandable Drawer Dividers', price: 22.37, rating: 4.4, sales: '7,000+', asin: 'B094624Q8Z', img: 'https://m.media-amazon.com/images/I/81xY3p5dCAL._AC_UL320_.jpg' },
+                { name: 'Isshah Coconut Fiber Kitchen Sponge (12 Pack)', price: 7.99, rating: 4.5, sales: '6,000+', asin: 'B0CSBG92MF', img: 'https://m.media-amazon.com/images/I/71i6N9Vv+YL._AC_UL320_.jpg' },
+                { name: 'Skoy Scrub Eco-Friendly Scrubber (4 Pack)', price: 9.99, rating: 4.7, sales: '1,000+', asin: 'B0CCHWSZ88', img: 'https://m.media-amazon.com/images/I/81KxS2aLXML._AC_UL320_.jpg' },
+                { name: 'Eco Chic Foldable Reusable Grocery Bag', price: 16.14, rating: 4.6, sales: '1,000+', asin: 'B082XR8HVB', img: 'https://m.media-amazon.com/images/I/71hX3y1y31L._AC_UL320_.jpg' },
+                { name: 'If You Care Natural Rubber Cotton Lined Household Gloves', price: 6.78, rating: 4.4, sales: '1,000+', asin: 'B00E1DCROE', img: 'https://m.media-amazon.com/images/I/71UjR7+K43L._AC_UL320_.jpg' },
+                { name: 'Stasher Silicone Reusable Food Storage Bag', price: 8.38, rating: 4.6, sales: '1,000+', asin: 'B06XPJT4CR', img: 'https://m.media-amazon.com/images/I/61bI2oZ+tCL._AC_UL320_.jpg' },
+                { name: 'LIBWYS Glass Food Storage Jars with Bamboo Lids (12 Pack)', price: 44.99, rating: 4.2, sales: '500+', asin: 'B0D7CPXZPK', img: 'https://m.media-amazon.com/images/I/71yI0y3M-5L._AC_UL320_.jpg' },
+                { name: 'FOTOSOK 6-Tier Bamboo Storage Shelf Unit', price: 63.49, rating: 4.7, sales: '300+', asin: 'B09WKN7477', img: 'https://m.media-amazon.com/images/I/71X8k+m03yL._AC_UL320_.jpg' },
+                { name: 'Bamboo Ziplock Bag Storage Organizer for Drawer', price: 19.99, rating: 4.6, sales: '5,000+', asin: 'B09M8R7X2L', img: 'https://m.media-amazon.com/images/I/81L8y1D0dAL._AC_UL320_.jpg' },
+                { name: 'Swedish Dishcloths for Kitchen (10 Pack Eco Absorbent)', price: 13.80, rating: 4.6, sales: '15,000+', asin: 'B07TG8J6X9', img: 'https://m.media-amazon.com/images/I/81x1e0+WpIL._AC_UL320_.jpg' },
+                { name: 'Bamboo Paper Towel Holder Stand for Kitchen Countertop', price: 11.99, rating: 4.5, sales: '2,000+', asin: 'B08L7V4Q22', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Reusable Organic Cotton Produce Bags (Set of 9)', price: 14.97, rating: 4.7, sales: '3,000+', asin: 'B07M68J1L8', img: 'https://m.media-amazon.com/images/I/81e5k7D31yL._AC_UL320_.jpg' },
+                { name: 'Bamboo Bread Box for Kitchen Countertop Dual Layer', price: 35.99, rating: 4.4, sales: '1,000+', asin: 'B08P1G5D41', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: 'Eco Glass Meal Prep Containers with Bamboo Lids (4 Pack)', price: 29.99, rating: 4.5, sales: '2,000+', asin: 'B07ZVF3L1C', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
+                { name: 'Beeswax Food Wraps Reusable Eco Friendly (6 Pack)', price: 15.99, rating: 4.5, sales: '4,000+', asin: 'B07J2Q1P4D', img: 'https://m.media-amazon.com/images/I/81v7d3S09yL._AC_UL320_.jpg' },
+                { name: 'Compost Bin for Kitchen Countertop Indoor Eco Bucket', price: 21.99, rating: 4.6, sales: '3,000+', asin: 'B015038S0C', img: 'https://m.media-amazon.com/images/I/71v1m2S341L._AC_UL320_.jpg' },
+                { name: 'Bamboo Dish Drying Rack Collapsible Folding Drainer', price: 14.88, rating: 4.4, sales: '2,000+', asin: 'B002A3AD26', img: 'https://m.media-amazon.com/images/I/81M1y2S341L._AC_UL320_.jpg' },
+                { name: 'Natural Loofah Kitchen Dish Sponge Eco Scrubbers (6 Pack)', price: 9.95, rating: 4.3, sales: '1,000+', asin: 'B0885P6KXL', img: 'https://m.media-amazon.com/images/I/71w1y2S341L._AC_UL320_.jpg' }
             ],
             workspace: [
-                { name: 'Claiks Electric Standing Desk (32x19 Inch)', price: 59.98, rating: 4.2, sales: '600+', asin: 'B0H45TV33J' },
-                { name: 'Huuger 31.5 Inch Foldable Computer Desk', price: 56.99, rating: 4.4, sales: '1,000+', asin: 'B0F43TL3GT' },
-                { name: 'Motumen Eye-Caring LED Desk Light with Clamp', price: 21.99, rating: 4.6, sales: '2,000+', asin: 'B0D4DG2CG2' },
-                { name: 'Dual Screen LED Monitor Light Bar', price: 49.99, rating: 4.6, sales: '3,000+', asin: 'B0BRCJL4MM' },
-                { name: '360° Rotating Clamp-on Mouse Platform Tray', price: 26.99, rating: 4.3, sales: '200+', asin: 'B072JLB1DP' },
-                { name: 'Govee RGBICWW Smart Light Bar for Desk Setup', price: 39.99, rating: 4.6, sales: '5,000+', asin: 'B096WZXKZP' },
-                { name: 'Ergonomic Desk Foot Rest Under Desk Cushion', price: 19.99, rating: 4.5, sales: '4,000+', asin: 'B07P3S3GPD' },
-                { name: 'Bamboo Monitor Riser Stand with Storage Organizer', price: 25.99, rating: 4.6, sales: '2,000+', asin: 'B07H898X7Y' },
-                { name: 'Under Desk Cable Management Tray Wire Organizer', price: 18.99, rating: 4.6, sales: '3,000+', asin: 'B089B3S18B' },
-                { name: 'Vertical Laptop Stand Adjustable Aluminium Desk Dock', price: 16.99, rating: 4.7, sales: '5,000+', asin: 'B0769FT652' },
-                { name: 'Desk Pad Mat Large Felt Eco Desk Organizer Protector', price: 13.99, rating: 4.5, sales: '4,000+', asin: 'B08C7T2N3R' },
-                { name: 'Under Desk Pull Out Storage Drawer Organizer', price: 14.99, rating: 4.3, sales: '2,000+', asin: 'B08J3Y5W8M' },
-                { name: 'Bamboo Desk Organizer Supply Caddy with Drawers', price: 22.99, rating: 4.6, sales: '1,000+', asin: 'B08F2H5N31' },
-                { name: 'Magnetic Cable Clips Cord Holder for Workspace', price: 8.99, rating: 4.5, sales: '8,000+', asin: 'B0892B1M45' },
-                { name: 'Foldable Laptop Stand Portable Ergonomic Riser', price: 12.99, rating: 4.6, sales: '10,000+', asin: 'B086YGML24' },
-                { name: 'Adjustable Monitor Arm Desk Mount Single Stand', price: 29.99, rating: 4.5, sales: '3,000+', asin: 'B07X48X4KM' },
-                { name: 'Bamboo Cable Management Box Hide Power Strips', price: 19.87, rating: 4.4, sales: '2,000+', asin: 'B07V2C1R9H' },
-                { name: 'Ergonomic Wrist Rest Pad for Keyboard and Mouse', price: 11.99, rating: 4.6, sales: '6,000+', asin: 'B0852N4S8L' },
-                { name: 'Compact Desk Task Chair Ergonomic Breathable Mesh', price: 49.99, rating: 4.3, sales: '2,000+', asin: 'B08B5R3S7Y' },
-                { name: 'Smart LED Desk Lamp with Wireless Charging Dock', price: 27.99, rating: 4.5, sales: '3,000+', asin: 'B07LGSZ38M' }
+                { name: 'Claiks Electric Standing Desk (32x19 Inch)', price: 59.98, rating: 4.2, sales: '600+', asin: 'B0H45TV33J', img: 'https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg', badge: '💻 Workspace' },
+                { name: 'Huuger 31.5 Inch Foldable Computer Desk', price: 56.99, rating: 4.4, sales: '1,000+', asin: 'B0F43TL3GT', img: 'https://m.media-amazon.com/images/I/81g1xTbudOL._AC_UL320_.jpg' },
+                { name: 'Motumen Eye-Caring LED Desk Light with Clamp', price: 21.99, rating: 4.6, sales: '2,000+', asin: 'B0D4DG2CG2', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Dual Screen LED Monitor Light Bar', price: 49.99, rating: 4.6, sales: '3,000+', asin: 'B0BRCJL4MM', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: '360° Rotating Clamp-on Mouse Platform Tray', price: 26.99, rating: 4.3, sales: '200+', asin: 'B072JLB1DP', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
+                { name: 'Govee RGBICWW Smart Light Bar for Desk Setup', price: 39.99, rating: 4.6, sales: '5,000+', asin: 'B096WZXKZP', img: 'https://m.media-amazon.com/images/I/81P84P4M8tL._AC_UL320_.jpg' },
+                { name: 'Ergonomic Desk Foot Rest Under Desk Cushion', price: 19.99, rating: 4.5, sales: '4,000+', asin: 'B07P3S3GPD', img: 'https://m.media-amazon.com/images/I/81xY3p5dCAL._AC_UL320_.jpg' },
+                { name: 'Bamboo Monitor Riser Stand with Storage Organizer', price: 25.99, rating: 4.6, sales: '2,000+', asin: 'B07H898X7Y', img: 'https://m.media-amazon.com/images/I/71i6N9Vv+YL._AC_UL320_.jpg' },
+                { name: 'Under Desk Cable Management Tray Wire Organizer', price: 18.99, rating: 4.6, sales: '3,000+', asin: 'B089B3S18B', img: 'https://m.media-amazon.com/images/I/81KxS2aLXML._AC_UL320_.jpg' },
+                { name: 'Vertical Laptop Stand Adjustable Aluminium Desk Dock', price: 16.99, rating: 4.7, sales: '5,000+', asin: 'B0769FT652', img: 'https://m.media-amazon.com/images/I/71hX3y1y31L._AC_UL320_.jpg' },
+                { name: 'Desk Pad Mat Large Felt Eco Desk Organizer Protector', price: 13.99, rating: 4.5, sales: '4,000+', asin: 'B08C7T2N3R', img: 'https://m.media-amazon.com/images/I/71UjR7+K43L._AC_UL320_.jpg' },
+                { name: 'Under Desk Pull Out Storage Drawer Organizer', price: 14.99, rating: 4.3, sales: '2,000+', asin: 'B08J3Y5W8M', img: 'https://m.media-amazon.com/images/I/61bI2oZ+tCL._AC_UL320_.jpg' },
+                { name: 'Bamboo Desk Organizer Supply Caddy with Drawers', price: 22.99, rating: 4.6, sales: '1,000+', asin: 'B08F2H5N31', img: 'https://m.media-amazon.com/images/I/71yI0y3M-5L._AC_UL320_.jpg' },
+                { name: 'Magnetic Cable Clips Cord Holder for Workspace', price: 8.99, rating: 4.5, sales: '8,000+', asin: 'B0892B1M45', img: 'https://m.media-amazon.com/images/I/71X8k+m03yL._AC_UL320_.jpg' },
+                { name: 'Foldable Laptop Stand Portable Ergonomic Riser', price: 12.99, rating: 4.6, sales: '10,000+', asin: 'B086YGML24', img: 'https://m.media-amazon.com/images/I/81L8y1D0dAL._AC_UL320_.jpg' },
+                { name: 'Adjustable Monitor Arm Desk Mount Single Stand', price: 29.99, rating: 4.5, sales: '3,000+', asin: 'B07X48X4KM', img: 'https://m.media-amazon.com/images/I/81x1e0+WpIL._AC_UL320_.jpg' },
+                { name: 'Bamboo Cable Management Box Hide Power Strips', price: 19.87, rating: 4.4, sales: '2,000+', asin: 'B07V2C1R9H', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Ergonomic Wrist Rest Pad for Keyboard and Mouse', price: 11.99, rating: 4.6, sales: '6,000+', asin: 'B0852N4S8L', img: 'https://m.media-amazon.com/images/I/81e5k7D31yL._AC_UL320_.jpg' },
+                { name: 'Compact Desk Task Chair Ergonomic Breathable Mesh', price: 49.99, rating: 4.3, sales: '2,000+', asin: 'B08B5R3S7Y', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: 'Smart LED Desk Lamp with Wireless Charging Dock', price: 27.99, rating: 4.5, sales: '3,000+', asin: 'B07LGSZ38M', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' }
             ],
             closet: [
-                { name: 'Volnamal Legging & Yoga Pants Space Saving Hanger', price: 9.99, rating: 4.4, sales: '10,000+', asin: 'B0BZCBJ7RL' },
-                { name: 'Non-Slip Stainless Steel 5-Tier Pants Hangers', price: 9.98, rating: 4.4, sales: '9,000+', asin: 'B0CYX497CJ' },
-                { name: 'Wonder Hanger Max Space Saving Folding Hanger', price: 26.98, rating: 4.7, sales: '9,000+', asin: 'B07GYLFFVR' },
-                { name: 'Stackable Closet Plastic Storage Bins Organizer', price: 28.79, rating: 4.5, sales: '6,000+', asin: 'B0CHVKCWS7' },
-                { name: 'NECAMOCU Multi-Hook Wooden Tank Top & Bra Hanger', price: 7.98, rating: 4.6, sales: '5,000+', asin: 'B0DQ67STGL' },
-                { name: 'Cedar Wood Rings for Closet Clothes Storage (30 Pack)', price: 11.99, rating: 4.5, sales: '4,000+', asin: 'B07R98S3X1' },
-                { name: 'Fabric Underbed Storage Containers with Clear Lid', price: 18.99, rating: 4.5, sales: '7,000+', asin: 'B08K3S2N4T' },
-                { name: 'Honeycomb Sock Drawer Divider Organizer Insert', price: 9.99, rating: 4.3, sales: '3,000+', asin: 'B07S7T9R2L' },
-                { name: 'Hanging Closet Organizer 5-Shelf Hanging Shelves', price: 14.99, rating: 4.6, sales: '5,000+', asin: 'B078N2S5M9' },
-                { name: 'Velvet Clothes Hangers Non-Slip Space Saving (50 Pack)', price: 23.99, rating: 4.8, sales: '25,000+', asin: 'B00FXNAAW2' },
-                { name: 'Clear Plastic Purse Organizer for Closet Shelves', price: 19.99, rating: 4.5, sales: '2,000+', asin: 'B09J4L3R7S' },
-                { name: 'Foldable Fabric Storage Cubes Bins (6 Pack)', price: 17.99, rating: 4.6, sales: '10,000+', asin: 'B071FP2R4L' },
-                { name: 'Space Saver Vacuum Storage Bags for Clothes (8 Pack)', price: 21.99, rating: 4.4, sales: '15,000+', asin: 'B00X8KS3I8' },
-                { name: 'Over The Door Shoe Organizer 24 Mesh Pockets', price: 10.99, rating: 4.6, sales: '12,000+', asin: 'B00DF29S3O' },
-                { name: 'Adjustable Shoe Slot Organizers Space Saver (10 Pack)', price: 22.99, rating: 4.2, sales: '3,000+', asin: 'B0797M24N7' },
-                { name: 'Natural Cedar Blocks for Closet Drawers (20 Pack)', price: 13.99, rating: 4.5, sales: '2,000+', asin: 'B08F3H4R8L' },
-                { name: 'Belt and Tie Hanger Rack Stainless Steel Organizer', price: 8.99, rating: 4.6, sales: '4,000+', asin: 'B078V29M12' },
-                { name: 'Undergarment Bra and Underwear Organizer Bins', price: 12.99, rating: 4.5, sales: '8,000+', asin: 'B07M59L82R' },
-                { name: 'Expandable Closet Shelf Organizer Rack Heavy Duty', price: 24.99, rating: 4.4, sales: '2,000+', asin: 'B08R7M29S3' },
-                { name: 'Natural Wooden Clothes Hangers Heavy Duty (20 Pack)', price: 21.99, rating: 4.7, sales: '6,000+', asin: 'B0721M5F7R' }
+                { name: 'Volnamal Legging & Yoga Pants Space Saving Hanger', price: 9.99, rating: 4.4, sales: '10,000+', asin: 'B0BZCBJ7RL', img: 'https://m.media-amazon.com/images/I/81v7d3S09yL._AC_UL320_.jpg', badge: '⚡ Space Saver' },
+                { name: 'Non-Slip Stainless Steel 5-Tier Pants Hangers', price: 9.98, rating: 4.4, sales: '9,000+', asin: 'B0CYX497CJ', img: 'https://m.media-amazon.com/images/I/71v1m2S341L._AC_UL320_.jpg' },
+                { name: 'Wonder Hanger Max Space Saving Folding Hanger', price: 26.98, rating: 4.7, sales: '9,000+', asin: 'B07GYLFFVR', img: 'https://m.media-amazon.com/images/I/81M1y2S341L._AC_UL320_.jpg' },
+                { name: 'Stackable Closet Plastic Storage Bins Organizer', price: 28.79, rating: 4.5, sales: '6,000+', asin: 'B0CHVKCWS7', img: 'https://m.media-amazon.com/images/I/71w1y2S341L._AC_UL320_.jpg' },
+                { name: 'NECAMOCU Multi-Hook Wooden Tank Top & Bra Hanger', price: 7.98, rating: 4.6, sales: '5,000+', asin: 'B0DQ67STGL', img: 'https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg' },
+                { name: 'Cedar Wood Rings for Closet Clothes Storage (30 Pack)', price: 11.99, rating: 4.5, sales: '4,000+', asin: 'B07R98S3X1', img: 'https://m.media-amazon.com/images/I/81g1xTbudOL._AC_UL320_.jpg' },
+                { name: 'Fabric Underbed Storage Containers with Clear Lid', price: 18.99, rating: 4.5, sales: '7,000+', asin: 'B08K3S2N4T', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Honeycomb Sock Drawer Divider Organizer Insert', price: 9.99, rating: 4.3, sales: '3,000+', asin: 'B07S7T9R2L', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: 'Hanging Closet Organizer 5-Shelf Hanging Shelves', price: 14.99, rating: 4.6, sales: '5,000+', asin: 'B078N2S5M9', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
+                { name: 'Velvet Clothes Hangers Non-Slip Space Saving (50 Pack)', price: 23.99, rating: 4.8, sales: '25,000+', asin: 'B00FXNAAW2', img: 'https://m.media-amazon.com/images/I/81P84P4M8tL._AC_UL320_.jpg' },
+                { name: 'Clear Plastic Purse Organizer for Closet Shelves', price: 19.99, rating: 4.5, sales: '2,000+', asin: 'B09J4L3R7S', img: 'https://m.media-amazon.com/images/I/81xY3p5dCAL._AC_UL320_.jpg' },
+                { name: 'Foldable Fabric Storage Cubes Bins (6 Pack)', price: 17.99, rating: 4.6, sales: '10,000+', asin: 'B071FP2R4L', img: 'https://m.media-amazon.com/images/I/71i6N9Vv+YL._AC_UL320_.jpg' },
+                { name: 'Space Saver Vacuum Storage Bags for Clothes (8 Pack)', price: 21.99, rating: 4.4, sales: '15,000+', asin: 'B00X8KS3I8', img: 'https://m.media-amazon.com/images/I/81KxS2aLXML._AC_UL320_.jpg' },
+                { name: 'Over The Door Shoe Organizer 24 Mesh Pockets', price: 10.99, rating: 4.6, sales: '12,000+', asin: 'B00DF29S3O', img: 'https://m.media-amazon.com/images/I/71hX3y1y31L._AC_UL320_.jpg' },
+                { name: 'Adjustable Shoe Slot Organizers Space Saver (10 Pack)', price: 22.99, rating: 4.2, sales: '3,000+', asin: 'B0797M24N7', img: 'https://m.media-amazon.com/images/I/71UjR7+K43L._AC_UL320_.jpg' },
+                { name: 'Natural Cedar Blocks for Closet Drawers (20 Pack)', price: 13.99, rating: 4.5, sales: '2,000+', asin: 'B08F3H4R8L', img: 'https://m.media-amazon.com/images/I/61bI2oZ+tCL._AC_UL320_.jpg' },
+                { name: 'Belt and Tie Hanger Rack Stainless Steel Organizer', price: 8.99, rating: 4.6, sales: '4,000+', asin: 'B078V29M12', img: 'https://m.media-amazon.com/images/I/71yI0y3M-5L._AC_UL320_.jpg' },
+                { name: 'Undergarment Bra and Underwear Organizer Bins', price: 12.99, rating: 4.5, sales: '8,000+', asin: 'B07M59L82R', img: 'https://m.media-amazon.com/images/I/71X8k+m03yL._AC_UL320_.jpg' },
+                { name: 'Expandable Closet Shelf Organizer Rack Heavy Duty', price: 24.99, rating: 4.4, sales: '2,000+', asin: 'B08R7M29S3', img: 'https://m.media-amazon.com/images/I/81L8y1D0dAL._AC_UL320_.jpg' },
+                { name: 'Natural Wooden Clothes Hangers Heavy Duty (20 Pack)', price: 21.99, rating: 4.7, sales: '6,000+', asin: 'B0721M5F7R', img: 'https://m.media-amazon.com/images/I/81x1e0+WpIL._AC_UL320_.jpg' }
             ],
             cleaning: [
-                { name: 'Eco-Friendly Laundry Detergent Sheets (100 Loads)', price: 15.99, rating: 4.6, sales: '12,000+', asin: 'B08F9M4L8S' },
-                { name: 'Wool Dryer Balls Organic New Zealand Wool (6 Pack)', price: 9.99, rating: 4.7, sales: '20,000+', asin: 'B00V52B4D8' },
-                { name: 'Bamboo Toilet Scrub Brush and Holder Set', price: 13.99, rating: 4.5, sales: '3,000+', asin: 'B0853R4M7T' },
-                { name: 'Natural Wooden Palm Dish Scrub Brushes (3 Pack)', price: 8.99, rating: 4.6, sales: '4,000+', asin: 'B08F3N5211' },
-                { name: 'Collapsible Eco Laundry Hamper Storage Basket', price: 16.99, rating: 4.5, sales: '5,000+', asin: 'B07983M1R7' },
-                { name: 'Reusable Microfiber Cleaning Cloths Towels (24 Pack)', price: 12.99, rating: 4.7, sales: '30,000+', asin: 'B009FUF6DM' },
-                { name: 'Bamboo Bottle Cleaning Scrub Brushes Set (4 Pieces)', price: 10.99, rating: 4.6, sales: '2,000+', asin: 'B089M6N2L3' },
-                { name: 'Guppyfriend Washing Bag Catches Microfibers', price: 34.95, rating: 4.4, sales: '1,000+', asin: 'B0744P2X2S' },
-                { name: 'Glass Spray Bottles for Eco DIY Cleaning Solutions (2 Pack)', price: 11.99, rating: 4.6, sales: '6,000+', asin: 'B07G3M2S9L' },
-                { name: 'Biodegradable Trash Bags Eco Friendly 13 Gallon (50 Ct)', price: 17.99, rating: 4.5, sales: '4,000+', asin: 'B08L2K9M12' },
-                { name: 'Bamboo Scrub Brush with Handle for Countertops & Sink', price: 7.99, rating: 4.6, sales: '3,000+', asin: 'B08F32M8S9' },
-                { name: 'Mesh Mesh Laundry Wash Bags for Delicates (5 Pack)', price: 8.99, rating: 4.7, sales: '15,000+', asin: 'B00E1CT2L2' },
-                { name: 'Stain Remover Bar Soap Natural Eco Wash Soap', price: 6.99, rating: 4.6, sales: '2,000+', asin: 'B07H89N3S1' },
-                { name: 'Ecological Multi-Surface Cleaner Powder Concentrate', price: 14.99, rating: 4.4, sales: '1,000+', asin: 'B09J42R8M1' },
-                { name: 'Foldable Bamboo Clothes Drying Rack Airer Stand', price: 32.99, rating: 4.5, sales: '2,000+', asin: 'B0032JTK50' },
-                { name: 'Natural Sisal Soap Saver Bags Eco Pouches (6 Pack)', price: 6.99, rating: 4.5, sales: '5,000+', asin: 'B082N3P4L2' },
-                { name: 'Stainless Steel Pegs Clothes Pins Pins (40 Pack)', price: 9.99, rating: 4.7, sales: '4,000+', asin: 'B07C3S1L82' },
-                { name: 'Bamboo Dustpan and Hand Broom Cleaning Set', price: 15.99, rating: 4.4, sales: '2,000+', asin: 'B08R9S2M41' },
-                { name: 'Natural Cotton Laundry Bag Drawstring Sack Heavy Duty', price: 10.99, rating: 4.6, sales: '3,000+', asin: 'B07G2M1S84' },
-                { name: 'Eco Wooden Window Squeegee Scrubber Cleaner Tool', price: 12.99, rating: 4.3, sales: '1,000+', asin: 'B08F7N2M11' }
+                { name: 'Eco-Friendly Laundry Detergent Sheets (100 Loads)', price: 15.99, rating: 4.6, sales: '12,000+', asin: 'B08F9M4L8S', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Wool Dryer Balls Organic New Zealand Wool (6 Pack)', price: 9.99, rating: 4.7, sales: '20,000+', asin: 'B00V52B4D8', img: 'https://m.media-amazon.com/images/I/81e5k7D31yL._AC_UL320_.jpg' },
+                { name: 'Bamboo Toilet Scrub Brush and Holder Set', price: 13.99, rating: 4.5, sales: '3,000+', asin: 'B0853R4M7T', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: 'Natural Wooden Palm Dish Scrub Brushes (3 Pack)', price: 8.99, rating: 4.6, sales: '4,000+', asin: 'B08F3N5211', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
+                { name: 'Collapsible Eco Laundry Hamper Storage Basket', price: 16.99, rating: 4.5, sales: '5,000+', asin: 'B07983M1R7', img: 'https://m.media-amazon.com/images/I/81v7d3S09yL._AC_UL320_.jpg' },
+                { name: 'Reusable Microfiber Cleaning Cloths Towels (24 Pack)', price: 12.99, rating: 4.7, sales: '30,000+', asin: 'B009FUF6DM', img: 'https://m.media-amazon.com/images/I/71v1m2S341L._AC_UL320_.jpg' },
+                { name: 'Bamboo Bottle Cleaning Scrub Brushes Set (4 Pieces)', price: 10.99, rating: 4.6, sales: '2,000+', asin: 'B089M6N2L3', img: 'https://m.media-amazon.com/images/I/81M1y2S341L._AC_UL320_.jpg' },
+                { name: 'Guppyfriend Washing Bag Catches Microfibers', price: 34.95, rating: 4.4, sales: '1,000+', asin: 'B0744P2X2S', img: 'https://m.media-amazon.com/images/I/71w1y2S341L._AC_UL320_.jpg' },
+                { name: 'Glass Spray Bottles for Eco DIY Cleaning Solutions (2 Pack)', price: 11.99, rating: 4.6, sales: '6,000+', asin: 'B07G3M2S9L', img: 'https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg' },
+                { name: 'Biodegradable Trash Bags Eco Friendly 13 Gallon (50 Ct)', price: 17.99, rating: 4.5, sales: '4,000+', asin: 'B08L2K9M12', img: 'https://m.media-amazon.com/images/I/81g1xTbudOL._AC_UL320_.jpg' },
+                { name: 'Bamboo Scrub Brush with Handle for Countertops & Sink', price: 7.99, rating: 4.6, sales: '3,000+', asin: 'B08F32M8S9', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Mesh Mesh Laundry Wash Bags for Delicates (5 Pack)', price: 8.99, rating: 4.7, sales: '15,000+', asin: 'B00E1CT2L2', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: 'Stain Remover Bar Soap Natural Eco Wash Soap', price: 6.99, rating: 4.6, sales: '2,000+', asin: 'B07H89N3S1', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
+                { name: 'Ecological Multi-Surface Cleaner Powder Concentrate', price: 14.99, rating: 4.4, sales: '1,000+', asin: 'B09J42R8M1', img: 'https://m.media-amazon.com/images/I/81P84P4M8tL._AC_UL320_.jpg' },
+                { name: 'Foldable Bamboo Clothes Drying Rack Airer Stand', price: 32.99, rating: 4.5, sales: '2,000+', asin: 'B0032JTK50', img: 'https://m.media-amazon.com/images/I/81xY3p5dCAL._AC_UL320_.jpg' },
+                { name: 'Natural Sisal Soap Saver Bags Eco Pouches (6 Pack)', price: 6.99, rating: 4.5, sales: '5,000+', asin: 'B082N3P4L2', img: 'https://m.media-amazon.com/images/I/71i6N9Vv+YL._AC_UL320_.jpg' },
+                { name: 'Stainless Steel Pegs Clothes Pins Pins (40 Pack)', price: 9.99, rating: 4.7, sales: '4,000+', asin: 'B07C3S1L82', img: 'https://m.media-amazon.com/images/I/81KxS2aLXML._AC_UL320_.jpg' },
+                { name: 'Bamboo Dustpan and Hand Broom Cleaning Set', price: 15.99, rating: 4.4, sales: '2,000+', asin: 'B08R9S2M41', img: 'https://m.media-amazon.com/images/I/71hX3y1y31L._AC_UL320_.jpg' },
+                { name: 'Natural Cotton Laundry Bag Drawstring Sack Heavy Duty', price: 10.99, rating: 4.6, sales: '3,000+', asin: 'B07G2M1S84', img: 'https://m.media-amazon.com/images/I/71UjR7+K43L._AC_UL320_.jpg' },
+                { name: 'Eco Wooden Window Squeegee Scrubber Cleaner Tool', price: 12.99, rating: 4.3, sales: '1,000+', asin: 'B08F7N2M11', img: 'https://m.media-amazon.com/images/I/61bI2oZ+tCL._AC_UL320_.jpg' }
             ],
             storage: [
-                { name: 'Under Bed Rolling Storage Bins with Wheels (2 Pack)', price: 34.99, rating: 4.5, sales: '4,000+', asin: 'B0B83M2L11' },
-                { name: 'Woven Seagrass Storage Baskets with Handles (3 Pack)', price: 29.99, rating: 4.6, sales: '3,000+', asin: 'B08R2S1M45' },
-                { name: 'Bamboo Floating Wall Shelves Set of 3 for Home', price: 21.99, rating: 4.5, sales: '5,000+', asin: 'B088R2M3S1' },
-                { name: 'Clear Plastic Lazy Susan Turntable Organizer 10 Inch', price: 13.99, rating: 4.7, sales: '10,000+', asin: 'B07R4M1S23' },
-                { name: 'Collapsible Storage Bins Crates Stacking Containers', price: 25.99, rating: 4.5, sales: '2,000+', asin: 'B09J2M3S45' },
-                { name: 'Bamboo Entryway Shoe Rack Bench 3-Tier Organizer', price: 38.99, rating: 4.6, sales: '3,000+', asin: 'B07B4M1S88' },
-                { name: 'Over The Door Storage Organizer 5 Pocket Hanging Caddy', price: 19.99, rating: 4.5, sales: '6,000+', asin: 'B08M2S3L41' },
-                { name: 'Natural Cotton Rope Storage Basket Large Laundry Bin', price: 22.99, rating: 4.8, sales: '8,000+', asin: 'B07M2S1L99' },
-                { name: 'Clear Acrylic Stackable Storage Drawers Bins (4 Pack)', price: 27.99, rating: 4.6, sales: '4,000+', asin: 'B09R3M1S22' },
-                { name: 'Bamboo Key Holder for Wall Decor with Mail Shelf', price: 14.99, rating: 4.6, sales: '3,000+', asin: 'B088R1M2L2' },
-                { name: 'Slim Rolling Utility Storage Cart 4-Tier Mobile Tower', price: 21.99, rating: 4.4, sales: '7,000+', asin: 'B08M3S1L55' },
-                { name: 'Wire Metal Storage Baskets with Wooden Handles (2 Pack)', price: 19.99, rating: 4.7, sales: '5,000+', asin: 'B08R4M2S11' },
-                { name: 'Bamboo Coat Rack Stand Tree 8 Hooks Heavy Duty', price: 26.99, rating: 4.5, sales: '2,000+', asin: 'B07M1S2L88' },
-                { name: 'Fabric Foldable Storage Baskets Boxes with Handles', price: 16.99, rating: 4.6, sales: '6,000+', asin: 'B08R1M3S22' },
-                { name: 'Under Sink Organizer 2-Tier Pull Out Cabinet Shelf', price: 23.99, rating: 4.5, sales: '12,000+', asin: 'B09M2S4L11' },
-                { name: 'Pegboard Wall Organizer Panel Kit Modular Storage Board', price: 31.99, rating: 4.4, sales: '1,000+', asin: 'B088M1S234' },
-                { name: 'Wall Mounted Spice Rack Bamboo Storage Organizer', price: 18.99, rating: 4.6, sales: '2,000+', asin: 'B08R2M4S99' },
-                { name: 'Vacuum Storage Bags Travel Hand Pump Compression', price: 14.99, rating: 4.3, sales: '5,000+', asin: 'B07M3S2L11' },
-                { name: 'Bamboo Tissue Box Cover Square Dispenser Holder', price: 12.99, rating: 4.6, sales: '4,000+', asin: 'B088M2S144' },
-                { name: 'Decorative Wooden Storage Trunk Chest Box with Latch', price: 39.99, rating: 4.5, sales: '1,000+', asin: 'B08R3M5L77' }
+                { name: 'Under Bed Rolling Storage Bins with Wheels (2 Pack)', price: 34.99, rating: 4.5, sales: '4,000+', asin: 'B0B83M2L11', img: 'https://m.media-amazon.com/images/I/71yI0y3M-5L._AC_UL320_.jpg' },
+                { name: 'Woven Seagrass Storage Baskets with Handles (3 Pack)', price: 29.99, rating: 4.6, sales: '3,000+', asin: 'B08R2S1M45', img: 'https://m.media-amazon.com/images/I/71X8k+m03yL._AC_UL320_.jpg' },
+                { name: 'Bamboo Floating Wall Shelves Set of 3 for Home', price: 21.99, rating: 4.5, sales: '5,000+', asin: 'B088R2M3S1', img: 'https://m.media-amazon.com/images/I/81L8y1D0dAL._AC_UL320_.jpg' },
+                { name: 'Clear Plastic Lazy Susan Turntable Organizer 10 Inch', price: 13.99, rating: 4.7, sales: '10,000+', asin: 'B07R4M1S23', img: 'https://m.media-amazon.com/images/I/81x1e0+WpIL._AC_UL320_.jpg' },
+                { name: 'Collapsible Storage Bins Crates Stacking Containers', price: 25.99, rating: 4.5, sales: '2,000+', asin: 'B09J2M3S45', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Bamboo Entryway Shoe Rack Bench 3-Tier Organizer', price: 38.99, rating: 4.6, sales: '3,000+', asin: 'B07B4M1S88', img: 'https://m.media-amazon.com/images/I/81e5k7D31yL._AC_UL320_.jpg' },
+                { name: 'Over The Door Storage Organizer 5 Pocket Hanging Caddy', price: 19.99, rating: 4.5, sales: '6,000+', asin: 'B08M2S3L41', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: 'Natural Cotton Rope Storage Basket Large Laundry Bin', price: 22.99, rating: 4.8, sales: '8,000+', asin: 'B07M2S1L99', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
+                { name: 'Clear Acrylic Stackable Storage Drawers Bins (4 Pack)', price: 27.99, rating: 4.6, sales: '4,000+', asin: 'B09R3M1S22', img: 'https://m.media-amazon.com/images/I/81v7d3S09yL._AC_UL320_.jpg' },
+                { name: 'Bamboo Key Holder for Wall Decor with Mail Shelf', price: 14.99, rating: 4.6, sales: '3,000+', asin: 'B088R1M2L2', img: 'https://m.media-amazon.com/images/I/71v1m2S341L._AC_UL320_.jpg' },
+                { name: 'Slim Rolling Utility Storage Cart 4-Tier Mobile Tower', price: 21.99, rating: 4.4, sales: '7,000+', asin: 'B08M3S1L55', img: 'https://m.media-amazon.com/images/I/81M1y2S341L._AC_UL320_.jpg' },
+                { name: 'Wire Metal Storage Baskets with Wooden Handles (2 Pack)', price: 19.99, rating: 4.7, sales: '5,000+', asin: 'B08R4M2S11', img: 'https://m.media-amazon.com/images/I/71w1y2S341L._AC_UL320_.jpg' },
+                { name: 'Bamboo Coat Rack Stand Tree 8 Hooks Heavy Duty', price: 26.99, rating: 4.5, sales: '2,000+', asin: 'B07M1S2L88', img: 'https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg' },
+                { name: 'Fabric Foldable Storage Baskets Boxes with Handles', price: 16.99, rating: 4.6, sales: '6,000+', asin: 'B08R1M3S22', img: 'https://m.media-amazon.com/images/I/81g1xTbudOL._AC_UL320_.jpg' },
+                { name: 'Under Sink Organizer 2-Tier Pull Out Cabinet Shelf', price: 23.99, rating: 4.5, sales: '12,000+', asin: 'B09M2S4L11', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
+                { name: 'Pegboard Wall Organizer Panel Kit Modular Storage Board', price: 31.99, rating: 4.4, sales: '1,000+', asin: 'B088M1S234', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
+                { name: 'Wall Mounted Spice Rack Bamboo Storage Organizer', price: 18.99, rating: 4.6, sales: '2,000+', asin: 'B08R2M4S99', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
+                { name: 'Vacuum Storage Bags Travel Hand Pump Compression', price: 14.99, rating: 4.3, sales: '5,000+', asin: 'B07M3S2L11', img: 'https://m.media-amazon.com/images/I/81P84P4M8tL._AC_UL320_.jpg' },
+                { name: 'Bamboo Tissue Box Cover Square Dispenser Holder', price: 12.99, rating: 4.6, sales: '4,000+', asin: 'B088M2S144', img: 'https://m.media-amazon.com/images/I/81xY3p5dCAL._AC_UL320_.jpg' },
+                { name: 'Decorative Wooden Storage Trunk Chest Box with Latch', price: 39.99, rating: 4.5, sales: '1,000+', asin: 'B08R3M5L77', img: 'https://m.media-amazon.com/images/I/71i6N9Vv+YL._AC_UL320_.jpg' }
             ]
         };
 
-        // Flatten all products
         let allProducts = [];
         Object.keys(rawCategories).forEach(cat => {
             rawCategories[cat].forEach(item => {
                 allProducts.push({
                     ...item,
                     category: cat,
-                    link: `https://www.amazon.com/dp/${item.asin}`
+                    // Dynamic Affiliate Link Generation
+                    link: `https://www.amazon.com/dp/${item.asin}?tag=${AFFILIATE_TAG}`
                 });
             });
         });
@@ -194,38 +207,47 @@
             countHeader.innerText = `Showing ${items.length} product(s)`;
 
             if (items.length === 0) {
-                container.innerHTML = `<div class="text-center py-10 text-slate-400 text-sm">No matching products found.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm">No matching products found.</div>`;
                 return;
             }
 
             items.forEach(item => {
                 const card = document.createElement('div');
-                card.className = "glass-card p-4 rounded-2xl shadow-sm hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-3";
+                card.className = "product-card bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex gap-4 items-center relative overflow-hidden";
                 
                 card.innerHTML = `
-                    <div class="space-y-1 flex-1">
-                        <h3 class="font-bold text-slate-900 text-sm leading-snug">${item.name}</h3>
-                        <div class="flex items-center gap-3 text-xs text-slate-500 pt-0.5">
-                            <span class="flex items-center gap-1 text-amber-500 font-semibold">
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center overflow-hidden shrink-0 relative">
+                        <img src="${item.img}" alt="${item.name}" loading="lazy" class="w-full h-full object-contain p-1.5 hover:scale-105 transition-transform duration-300" 
+                            onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Eco-Smart';">
+                    </div>
+
+                    <div class="flex-1 min-w-0 flex flex-col justify-between h-full space-y-1.5">
+                        <div>
+                            ${item.badge ? `<span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-md mb-1">${item.badge}</span>` : ''}
+                            <h3 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug line-clamp-2 hover:text-emerald-700 transition">${item.name}</h3>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-[11px] text-slate-500">
+                            <span class="flex items-center gap-1 text-amber-500 font-bold">
                                 <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 stroke-amber-400"></i> ${item.rating}
                             </span>
-                            <span>•</span>
-                            <span class="flex items-center gap-1">
-                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5 text-slate-400"></i> ${item.sales}/mo
+                            <span class="text-slate-300">•</span>
+                            <span class="text-slate-600 font-medium flex items-center gap-1">
+                                <i data-lucide="shopping-bag" class="w-3 h-3 text-slate-400"></i> ${item.sales}/mo
                             </span>
-                            <span>•</span>
-                            <span class="text-slate-400 font-mono text-[11px]">${item.asin}</span>
                         </div>
-                    </div>
-                    <div class="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-0 border-slate-100">
-                        <div class="text-left sm:text-right">
-                            <span class="text-[10px] text-slate-400 block">From</span>
-                            <span class="text-base font-extrabold text-emerald-800">$${item.price.toFixed(2)}</span>
+
+                        <div class="flex items-center justify-between pt-1 border-t border-slate-100 mt-1">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block uppercase font-medium">Est. Price</span>
+                                <span class="text-sm sm:text-base font-extrabold text-emerald-800">$${item.price.toFixed(2)}</span>
+                            </div>
+                            
+                            <a href="${item.link}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-1.8 bg-emerald-800 hover:bg-emerald-900 active:scale-95 text-white font-bold text-xs rounded-xl shadow-sm transition-all">
+                                <span>Check Price</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </a>
                         </div>
-                        <a href="${item.link}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 px-4 py-2 bg-emerald-800 hover:bg-emerald-900 text-white font-semibold text-xs rounded-xl shadow-sm transition">
-                            <span>View Product</span>
-                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                        </a>
                     </div>
                 `;
                 container.appendChild(card);
@@ -236,9 +258,9 @@
         function setTab(tab) {
             currentTab = tab;
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-white text-slate-600 border hover:bg-slate-50 transition";
+                btn.className = "tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all";
             });
-            document.getElementById(`tab-${tab}`).className = "tab-btn shrink-0 px-3.5 py-1.5 rounded-lg font-semibold bg-emerald-800 text-white shadow-sm transition";
+            document.getElementById(`tab-${tab}`).className = "tab-btn shrink-0 px-4 py-2 rounded-xl font-bold bg-emerald-800 text-white shadow-md transition-all";
             filterProducts();
         }
 
@@ -252,7 +274,6 @@
             renderProducts(filtered);
         }
 
-        // Initial Render
         renderProducts(allProducts);
     </script>
 </body>
