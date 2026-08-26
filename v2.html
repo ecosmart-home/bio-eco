@@ -102,7 +102,6 @@
     const AFFILIATE_TAG = "ecosmart0f5-20";
     const FALLBACK_IMG = "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=400&q=80";
 
-    // Chuẩn hóa và gắn Tag Affiliate tự động cho mọi Link Amazon
     function getAffiliateLink(rawUrl) {
       if (!rawUrl || rawUrl === '#') return '#';
       try {
@@ -117,24 +116,619 @@
       }
     }
 
+    // Full 61 Extracted Products Data
     const productsData = [
-      { id: 1, title: "Claiks Electric Standing Desk, 32x19 Inch, Black", category: "Organizers", price: "$59.98", rating: "4.2", img: "https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0H45TV33J", badge: "Limited Deal" },
-      { id: 2, title: "55 X 20 Inch Computer Desk, Power Outlets, USB-C, Rustic Brown", category: "Workspace", price: "$67.46", rating: "4.6", img: "https://m.media-amazon.com/images/I/81vkmfK0hXL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0FZ566DBT", badge: "Popular" },
-      { id: 3, title: "YIHAYO Electric Standing Desk, 48 x 24 Inches Adjustable Height", category: "Organizers", price: "$89.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/71MgPlTkWeL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CY7X73Z6", badge: "" },
-      { id: 4, title: "DUMOS 32 Inch Small Computer Desk for Home Office Bedroom", category: "Workspace", price: "$19.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/71rL0QguLAL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0GYPQ75WH", badge: "Best Seller" },
-      { id: 5, title: "DUMOS 47\" L Shaped Computer Desk with Storage Shelves", category: "Workspace", price: "$41.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/71X8kM3sH1L._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CX8G1Y7C", badge: "" },
-      { id: 6, title: "Huuger Folding Desk for Small Spaces, 31.5 Inch Foldable Table", category: "Workspace", price: "$56.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/81P2nFfW3GL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0C3R8H8KK", badge: "Space Saver" },
-      { id: 7, title: "Motumen Led Desk Lamp for Home Office, Eye-Care Light Clamp", category: "Lighting", price: "$21.99", rating: "4.6", img: "https://m.media-amazon.com/images/I/61N+Vw4JbHL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0D189YJ8P", badge: "Top Pick" },
-      { id: 8, title: "Led Architect Desk Lamp with Clamp, Dual Screen Work Light 24W", category: "Lighting", price: "$49.99", rating: "4.6", img: "https://m.media-amazon.com/images/I/71o32LdM-3L._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0BNM7L99S", badge: "" },
-      { id: 9, title: "HUANUO 32\" X 21\" Electric Standing Desk with 2 Drawers", category: "Lighting", price: "$89.98", rating: "4.5", img: "https://m.media-amazon.com/images/I/71rD7H19GML._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0C33PZ9N4", badge: "Storage Desk" },
-      { id: 10, title: "Agilestic 26*16 Inch Height Adjustable Standing Desk", category: "Organizers", price: "$79.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/71VfR92b7IL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CNGNRH37", badge: "" },
-      { id: 11, title: "Lufeiya Gaming Desk with Fabric Drawers, 47 Inch Office Table", category: "Organizers", price: "$69.99", rating: "4.6", img: "https://m.media-amazon.com/images/I/81I2U3vCgNL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B09TR7V1R9", badge: "" },
-      { id: 12, title: "OLIXIS 39 Inch L Shaped Desk, Corner Gaming Computer Desk", category: "Workspace", price: "$49.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/81fHInXhSPL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0BV6J8F3Y", badge: "" },
-      { id: 13, title: "Small Portable Rolling Standing Desk on Wheels with Drawers", category: "Organizers", price: "$45.99", rating: "4.3", img: "https://m.media-amazon.com/images/I/71R2MUn4dXL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CL9Q4P4C", badge: "Mobile" },
-      { id: 14, title: "Govee Smart Light Bar, RGBICWW TV Lights for Living Room", category: "Lighting", price: "$39.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/61S194XJvTL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0963L31R8", badge: "Smart Light" },
-      { id: 15, title: "Dual Monitor Stand Riser with Storage Drawer & Pen Holders", category: "Organizers", price: "$29.99", rating: "4.7", img: "https://m.media-amazon.com/images/I/71m0f5f+BvL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B08CZ8M4J3", badge: "Must Have" },
-      { id: 16, title: "Desk Lamp with Wireless Charger & Digital Clock", category: "Lighting", price: "$32.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/61NfT28f5WL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0B79N8S5Q", badge: "Multi-function" }
-    ];
+  {
+    "id": 1,
+    "title": "Claiks Electric Standing Desk, 32x19 Inch, Black",
+    "category": "Organizers",
+    "price": "$59.98",
+    "rating": "4.2",
+    "img": "https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0H45TV33J?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 2,
+    "title": "55 X 20 Inch Computer Desk, Power Outlets, USB-C, Rustic Brown",
+    "category": "Workspace",
+    "price": "$67.46",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/81vkmfK0hXL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0FZ566DBT?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 3,
+    "title": "YIHAYO Electric Standing Desk, 48 x 24 Inches Stand Up Desk with Splice Board, Adjustable Height Desk, Computer Desk for Home Office, Black Frame/Rustic Brown Top",
+    "category": "Organizers",
+    "price": "$89.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71MgPlTkWeL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CY7X73Z6?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 4,
+    "title": "DUMOS 32 Inch Small Computer Desk, Gaming Desks for Home Office Bedroom",
+    "category": "Workspace",
+    "price": "$19.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71rL0QguLAL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0GYPQ75WH?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 5,
+    "title": "DUMOS 47\" L Shaped Computer Desk, Corner Desks with Storage Shelves, Brown",
+    "category": "Organizers",
+    "price": "$41.99",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/71X8kM3sH1L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0HB4S9T61?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 6,
+    "title": "Huuger Folding Desk for Small Spaces, 31.5 Inch Foldable Computer Table",
+    "category": "Workspace",
+    "price": "$56.99",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/81P2nFfW3GL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0F43TL3GT?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 7,
+    "title": "Motumen Led Desk Lamp for Home Office, Eye-Care Desk Light Clamp, Black",
+    "category": "Lighting",
+    "price": "$21.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/61N+Vw4JbHL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D4DG2CG2?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 8,
+    "title": "Led Desk Lamp for Office Home - Eye Caring Architect lamp with Clamp,Dual Screen Computer Monitor Work Smart Light: 24W 5 Color Flexible Adjustable Lighting Table Lamp for Study Drafting",
+    "category": "Lighting",
+    "price": "$49.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71o32LdM-3L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0BRCJL4MM?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 9,
+    "title": "Led Desk Lamp with Clamp, Architect Desk Lamp for Home Office with Atmosphere Lighting, 24W Ultra Bright Auto Dimming Computer Light Stepless Dimming and Tempering LED Table Light",
+    "category": "Lighting",
+    "price": "$49.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71G7gJY5FYL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0BNHNG5CY?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 10,
+    "title": "HUANUO 32\" X 21\" Electric Standing Desk with 2 Drawers, C-Clamp Mount Compatible, Height Adjustable Computer Desk, Home Office Stand Up Desk with 4 Preset Heights & 2 Hooks, Light Walnut",
+    "category": "Lighting",
+    "price": "$89.98",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71rD7H19GML._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0G5MW8SKH?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 11,
+    "title": "Gaming Desk Computer Writing Table Student Art Modren Simple Style PC Wood Suitable Portable Desk for Home, Office",
+    "category": "Workspace",
+    "price": "$39.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/815LJYab8mL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CYZYQZ2K?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 12,
+    "title": "Agilestic 26*16 Inch Height Adjustable Electric Standing Desk, Rustic Brown",
+    "category": "Organizers",
+    "price": "$79.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71VfR92b7IL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DFM933M2?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 13,
+    "title": "Lufeiya Black Gaming Desk with LED Lights and Power Outlets, 40 Inch Teen Writing Study Table Home Office Desks with Monitor Stand, Computer Desk with Charging Station USB Port, Black",
+    "category": "Organizers",
+    "price": "$49.99",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/71CyRyEBOKL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CW19DMLZ?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 14,
+    "title": "Lufeiya Gaming Desk with Fabric Drawers, 47 Inch Computer Desk for Home Office, Modern Simple Study Writing Table PC Desks for Bedroom, Black",
+    "category": "Organizers",
+    "price": "$69.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/81I2U3vCgNL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CXSMM2QG?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 15,
+    "title": "Small Standing Desk with Storage, Height Adjustable Sit Stand Desk with Drawers, Mobile Office Desk with Wheels and Side Pocket, Adjustable Laptop Workstation for Home Office",
+    "category": "Organizers",
+    "price": "$89.99",
+    "rating": "4.3",
+    "img": "https://m.media-amazon.com/images/I/616md8tdywL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0F3398RSR?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 16,
+    "title": "OLIXIS 39 Inch L Shaped Desk, Corner Computer Gaming Desks with Shelves",
+    "category": "Organizers",
+    "price": "$49.99",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/81fHInXhSPL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DT3M2CYL?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 17,
+    "title": "Small Portable Rolling Standing Desk - 32 Inch Adjustable Mobile Stand Up Gaming Desks with 2 Fabric Drawers on Wheels, Couch Sofa Side Laptop Table with Storage for Home Office, Black",
+    "category": "Organizers",
+    "price": "$45.99",
+    "rating": "4.3",
+    "img": "https://m.media-amazon.com/images/I/71R2MUn4dXL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DC2684D3?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 18,
+    "title": "Sweetcrispy Electric Standing Desk, Computer Desk, 48x24 Inch",
+    "category": "Workspace",
+    "price": "$119.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71wscARk+5L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DLNXXN6X?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 19,
+    "title": "Limitless TotalDesk Portable Modern Workstation and Lap Desk with Adjustable Height & Tilt (Black)",
+    "category": "Workspace",
+    "price": "$49.99",
+    "rating": "4.1",
+    "img": "https://m.media-amazon.com/images/I/71RSaS6bBCL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DNYK6Z2V?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 20,
+    "title": "VASAGLE Electric Standing Desk, Height Adjustable, 47.2 x 23.6 Inches",
+    "category": "Workspace",
+    "price": "$139.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71-cYSzsWEL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DF7LN3NM?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 21,
+    "title": "Rolling Computer Desk, 31.5 Inch Small Desks For Small Space, Portable Small Computer Desk With Wheels Small Rolling Desk Modern Laptop Table Gaming Desk Writing Study Table Workstation Wood Black",
+    "category": "Organizers",
+    "price": "$29.99",
+    "rating": "4.3",
+    "img": "https://m.media-amazon.com/images/I/81DSuefhptL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D8TYV1L5?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 22,
+    "title": "Pamray 47 Inch Reversible L Shaped Gaming Desk Corner Computer Desk with Storage Shelves Reversible Small Desk Study Writing PC Desk Workstation for Home Office Bedroom (Brown)",
+    "category": "Organizers",
+    "price": "$39.99",
+    "rating": "4.3",
+    "img": "https://m.media-amazon.com/images/I/71evkKteXJL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DFM9C58Y?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 23,
+    "title": "39.4 Inch Computer Office Desk with Power Outelts and USB-C Port, Reversible Gaming Desk Study Desk Small PC Writing Table Workstation for Home Office Bedroom, Rustic Brown",
+    "category": "Eco Living",
+    "price": "$44.97",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71CpoWvferL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DGJS8SLQ?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 24,
+    "title": "Agilestic 48*24 Inch Height Adjustable Electric Standing Desk, Rustic Brown",
+    "category": "Organizers",
+    "price": "$99.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71GWwHisDvL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DDTZ9S7Y?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 25,
+    "title": "DUMOS 48 Inch Electric Standing Desk, Memory Adjustable Home Office Desk",
+    "category": "Organizers",
+    "price": "$89.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/51-eh899k1L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D5Y1L1Z9?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 26,
+    "title": "snsok Smart Desk Lamp with Dual USB Charging (Type-C/USB-A) & 2 AC Outlets, Digital Alarm Clock, Thermometer, Pen Holder Organizer & Touch Dimmable 3 Color Modes Nightstand Table Light, Black",
+    "category": "Lighting",
+    "price": "$19.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71oVjGOog9L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D93L8G8T?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 27,
+    "title": "Desk Organizers and Accessories, Dual Monitor Stand Riser with Drawer and 2 Pen Holders, Heavy Duty Length Adjustable Desk Shelf Organizers Storage for Office Home Computer, Black",
+    "category": "Organizers",
+    "price": "$29.99",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/71TWXYC0rHL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0C4DF8542?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 28,
+    "title": "Desk Lamp with Wireless Charger: USB Charging Port, Table Lamp with Clock, Desk Light Touch Control Dimmer 3 Lighting Modes Eye Caring Desk Light Dimmable Lamp for Home Office Work",
+    "category": "Lighting",
+    "price": "$17.99",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/81PRz1dHuUL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CGXLYL17?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 29,
+    "title": "deeloop LED Desk Lamp, CRI95+ Eye-Care Light, Auto Dimming, Clamp Lamp",
+    "category": "Lighting",
+    "price": "$27.95",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71Ucc4Qv7hL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CSGW7P6P?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 30,
+    "title": "Claiks 48 x 24 Inch White Electric Standing Desk",
+    "category": "Organizers",
+    "price": "$119.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71fSeXNXQPL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D5BJS21D?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 31,
+    "title": "Clamp on Mouse Platform, Clip on Mouse Pad, Rotating 360, Easy Slide Out Tray, Under Desk Mouse Pad Armrest Ergonomic Mouse Tray for Desk, Metal Desk Organizer Office Accessories",
+    "category": "Organizers",
+    "price": "$23.99",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/71GVWo-3wdL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DLN34JSM?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 32,
+    "title": "Lufeiya White Computer Desk with LED Lights and Power Outlets, 40 Inch Home Office Desks with Monitor Stand, White Gaming Desk Teen Writing Study Table, PC Small Desk Charging Station USB Port",
+    "category": "Organizers",
+    "price": "$49.99",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/61wCdSh7MOL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CSBNZMM3?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 33,
+    "title": "Desk Organizer with Cup & Headphone Holder, Clamp-On",
+    "category": "Organizers",
+    "price": "$19.99",
+    "rating": "4.8",
+    "img": "https://m.media-amazon.com/images/I/71vIgL35wZL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CZ3M2P91?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 34,
+    "title": "HOOBRO Computer Desk, 31.5 Inch Small Desk with Power Outlet, Writing Table with Reversible Shelves for Small Spaces, Home Office Workstation, PC Table, Black BF80CD01",
+    "category": "Organizers",
+    "price": "$39.99",
+    "rating": "4.3",
+    "img": "https://m.media-amazon.com/images/I/71Lg-bVp8JL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CZ8K9G7H?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 35,
+    "title": "Govee Smart Light Bar, RGBICWW TV Lights for Living Room, Gaming, Black",
+    "category": "Lighting",
+    "price": "$39.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/61SPzTn4RxL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B08X1S2511?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 36,
+    "title": "Desk Organizer with Wireless Charger, Digital Clock, Thermometer",
+    "category": "Organizers",
+    "price": "$27.98",
+    "rating": "4.2",
+    "img": "https://m.media-amazon.com/images/I/71y0y7pA39L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D5BJSJ8N?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 37,
+    "title": "HOOBRO Small Computer Desk, 28.3\" Desk for Small Spaces, Office Desk with Power Outlets and USB Ports, Writing Study Desk Table with Storage Bag and Hooks, PC Gaming Desk, Rustic Brown BF28CD01",
+    "category": "Organizers",
+    "price": "$29.99",
+    "rating": "4.3",
+    "img": "https://m.media-amazon.com/images/I/81I+F676P5L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CYZYQZ2K?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 38,
+    "title": "IHAO Smart LED Desk Lamp with Wireless Charger & Bluetooth Speaker, 15W Fast Charger, Dimmable Touch Control Lamp with Alarm Clock, Eye-Caring Table Light for Home Office Bedroom Bedside",
+    "category": "Lighting",
+    "price": "$39.97",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/61m3J29a8vL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DG126X78?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 39,
+    "title": "Desk Organizer and Accessories, 2-Tier Computer Monitor Stand Rise with Storage Drawer, Mesh Desk Supplies Organizer for Home Office Desk Accessories Storage Black",
+    "category": "Organizers",
+    "price": "$28.95",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/81kQ9C49A5L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CZ3M2P91?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 40,
+    "title": "Small Folding Computer Desk – Portable 35.8 Inch Foldable Laptop Table, No-Assembly Writing Desk for Small Space, Home Office, Bedroom, RV - Rustic Brown",
+    "category": "Organizers",
+    "price": "$39.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/81P2nFfW3GL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D2518K7Y?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 41,
+    "title": "Mksuper LED Desk Lamp for Home Office with Clamp, CRI95 Eye-Caring Architect Desk Light, 24W Ultra Bright Auto Dimming Dual Screen Computer Light, Dimmable Desk Lamp for Study Working Drafting",
+    "category": "Lighting",
+    "price": "$39.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/611Z71S06TL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0BNHNG5CY?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 42,
+    "title": "Small Computer Desk with Power Outlets and USB Ports, 31.5 Inch Small Desk for Small Spaces, Writing Study Desk Table with Storage Bag & Pegboard, PC Desk Workstation for Home Office Bedroom, Black",
+    "category": "Organizers",
+    "price": "$29.99",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/81fHInXhSPL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DFM933M2?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 43,
+    "title": "Sweetcrispy Small Folding Computer Desk, 31.5 Inch Portable Foldable Table, No Assembly Laptop Writing Study Desks for Small Spaces, Home Office, Bedroom, Apartment, Rustic Brown",
+    "category": "Organizers",
+    "price": "$29.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/81fHInXhSPL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0C3R8H8KK?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 44,
+    "title": "BesTiAn Dual Monitor Stand Riser, Wooden Length and Angle Adjustable Computer Monitor Stand with Storage Drawer, Desk Organizer Shelf for Laptop, Printer, TV, Computer, Black",
+    "category": "Organizers",
+    "price": "$24.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/718kCq3P1KL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D5BJSJ8N?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 45,
+    "title": "DUMOS Small Computer Desk, 32 Inch Writing Desk for Small Space, Student Study Table PC Workstation for Home Office Bedroom Apartment, Rustic Brown",
+    "category": "Organizers",
+    "price": "$24.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/71rL0QguLAL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0GYPQ75WH?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 46,
+    "title": "Under Desk Cable Management Tray, No Drilling Metal Cord Organizer for Desk, Wire Management Under Desk with Wire Ties & Clips, Cable Tray Holder for Home Office Computer Desk, Black",
+    "category": "Organizers",
+    "price": "$15.98",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/711j4eK2LlL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0C4DF8542?tag=ecosmart0f5-20",
+    "badge": "Limited time deal"
+  },
+  {
+    "id": 47,
+    "title": "Monitor Stand Riser, 2 Tier Wood Desk Organizer Shelf with Drawer, Computer Screen Stand Storage Organizer for Laptop, Notebook, Printer, Office Desk Accessories, Black",
+    "category": "Organizers",
+    "price": "$23.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71TWXYC0rHL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0B79N8S5Q?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 48,
+    "title": "Govee RGBIC LED Strip Lights, 16.4ft Smart Light Strip with App Control, 64 Scenes, Music Sync LED Lights for Bedroom, Living Room, Party, Gaming Room Decor, Works with Alexa",
+    "category": "Lighting",
+    "price": "$19.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/61S194XJvTL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0963L31R8?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 49,
+    "title": "Govee TV LED Backlight with Camera, DreamView T1 Smart TV Backlights for 55-65 inch TVs, Wi-Fi RGBIC LED Strip Lights for TV, App & Voice Control, Works with Alexa & Google Assistant",
+    "category": "Lighting",
+    "price": "$49.99",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/719S-X1-GUL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B08L9S1D1A?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 50,
+    "title": "Desk Lamp with Wireless Charger, Touch Control LED Table Lamp with USB Charging Port, Dimmable Office Lamp with Clock, Alarm, Date, Temperature, 3 Color Modes 5 Brightness Levels for Study Reading",
+    "category": "Lighting",
+    "price": "$19.95",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/61NfT28f5WL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0B79N8S5Q?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 51,
+    "title": "LED Desk Lamp for Home Office, Architectural Clamp Light, 24W Ultra Bright Double Head Desk Lamp, Auto Dimming Stepless Dimmable Eye-Caring Drafting Table Lamp, 5 Color Modes for Monitor Working",
+    "category": "Lighting",
+    "price": "$35.95",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71G7gJY5FYL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0BNHNG5CY?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 52,
+    "title": "Govee Smart Light Bars, RGBICWW WiFi TV Light Bars with Scene Modes and Music Modes for Gaming, Movies, PC, TV Room Decor, Works with Alexa & Google Assistant",
+    "category": "Lighting",
+    "price": "$48.41",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/61SPzTn4RxL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B08X1S2511?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 53,
+    "title": "Computer Monitor Light Bar, Screenbar Monitor Light for Desk, Eye-Care Screen Backlight with Touch Sensor Auto-Dimming, Stepless Brightness & Color Temperature LED Monitor Lamp for Office Home",
+    "category": "Lighting",
+    "price": "$29.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/61N+Vw4JbHL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0D189YJ8P?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 54,
+    "title": "Desk Lamp LED Eye-Caring Table Lamps for Home Office, Touch Control Dimmable Reading Light with USB Charging Port, 5 Color Modes 10 Brightness Levels Auto Timer Nightstand Light Black",
+    "category": "Lighting",
+    "price": "$15.99",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/81PRz1dHuUL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CGXLYL17?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 55,
+    "title": "Computer Monitor Light Bar with Remote Control, Wireless Screenbar Light for Desk, Auto Dimming Touch Control Eye-Caring Screen Backlight, Stepless Brightness LED Monitor Lamp for Office Home",
+    "category": "Lighting",
+    "price": "$39.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71Ucc4Qv7hL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CSGW7P6P?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 56,
+    "title": "Dual Monitor Arm Desk Mount, Heavy Duty Adjustable Gas Spring Monitor Stand for 17 to 32 Inch Screens, Each Arm Holds 4.4 to 19.8 lbs, C-Clamp/Grommet Mount, VESA Mount 75x75 100x100 Black",
+    "category": "Organizers",
+    "price": "$39.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71rD7H19GML._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0C33PZ9N4?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 57,
+    "title": "Monitor Stand Riser, Mesh Desk Organizer Shelf with Pull-Out Storage Drawer & Side Pen Holders for Computer, Laptop, Printer, Notebook, Home Office Supplies Storage Black",
+    "category": "Organizers",
+    "price": "$19.99",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/81kQ9C49A5L._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0CZ3M2P91?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 58,
+    "title": "Under Desk Storage Drawer, Self-Adhesive Slide-Out Under Desk Organizer Box for Office Supplies, Hidden Pen Tray Storage Box for Home Office Bedroom School Desk Organizer Attachment Black",
+    "category": "Organizers",
+    "price": "$12.99",
+    "rating": "4.3",
+    "img": "https://m.media-amazon.com/images/I/711j4eK2LlL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0C4DF8542?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 59,
+    "title": "Ergonomic Foot Rest Cushion under Desk for Gaming Chair, Office Chair, Non-Slip Soft Foam Footstool Pillow Leg Rest Cushion Support for Home Workstation Desk Accessories Black",
+    "category": "Eco Living",
+    "price": "$19.99",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/71R2MUn4dXL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DC2684D3?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 60,
+    "title": "Large Leather Desk Pad Protector, 31.5\" x 15.7\" Non-Slip Waterproof PU Leather Desk Mat, Dual-Sided Mouse Pad Desk Blotter Protector for Office Home Workstation Keyboard Laptop Black",
+    "category": "Eco Living",
+    "price": "$11.99",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/71GVWo-3wdL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B0DLN34JSM?tag=ecosmart0f5-20",
+    "badge": ""
+  },
+  {
+    "id": 61,
+    "title": "Vertical Laptop Stand Holder Desk Storage, Adjustable Aluminum Laptop Dock Riser Fits All MacBooks, Surface, Chromebook, Gaming Laptops up to 17.3 Inches Space Saver Black",
+    "category": "Eco Living",
+    "price": "$16.99",
+    "rating": "4.8",
+    "img": "https://m.media-amazon.com/images/I/71m0f5f+BvL._AC_UL320_.jpg",
+    "link": "https://www.amazon.com/dp/B08CZ8M4J3?tag=ecosmart0f5-20",
+    "badge": ""
+  }
+];
 
     let currentCategory = 'All';
     let searchQuery = '';
