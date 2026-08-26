@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Smart Living | Smart & Sustainable Home Finds</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #f4f6f4; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .active-tab { background-color: #2e5b38 !important; color: #ffffff !important; font-weight: 600; }
+  </style>
+</head>
+<body class="text-gray-800 pb-20">
+
+  <!-- Main Container (Mobile Max Width) -->
+  <div class="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
+
+    <!-- Header / Bio Section -->
+    <header class="pt-8 pb-6 px-5 text-center bg-gradient-to-b from-emerald-50 to-white relative border-b border-gray-100">
+      <div class="relative w-24 h-24 mx-auto mb-3">
+        <div class="w-24 h-24 rounded-full bg-emerald-100 border-2 border-emerald-600 p-1 flex items-center justify-center shadow-md overflow-hidden">
+          <span class="text-4xl">🌿</span>
+        </div>
+        <span class="absolute bottom-0 right-0 bg-emerald-600 text-white rounded-full p-1 text-xs shadow" title="Verified Creator">
+          <i class="fas fa-check-circle"></i>
+        </span>
+      </div>
+
+      <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight">Eco-Smart Living</h1>
+      <p class="text-xs font-semibold text-emerald-700 uppercase tracking-widest mt-1">Smart • Space-Saving • Sustainable</p>
+      <p class="text-xs text-gray-600 mt-2 px-2 leading-relaxed">
+        Curated smart home organization, ergonomic setups & eco-friendly finds. Direct Amazon links below!
+      </p>
+
+      <!-- Social Links (All 5 Channels) -->
+      <div class="flex justify-center items-center gap-4 mt-4 text-lg">
+        <a href="https://instagram.com/ecosmartliving22" target="_blank" class="text-pink-600 hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/ecosmartliving" target="_blank" class="text-blue-600 hover:scale-110 transition"><i class="fab fa-facebook"></i></a>
+        <a href="https://threads.net/@ecosmartliving22" target="_blank" class="text-black hover:scale-110 transition"><i class="fab fa-threads"></i></a>
+        <a href="https://tiktok.com/@ecosmartliving0" target="_blank" class="text-gray-900 hover:scale-110 transition"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.youtube.com/@EcoSmartLiving.official" target="_blank" class="text-red-600 hover:scale-110 transition"><i class="fab fa-youtube"></i></a>
+      </div>
+    </header>
+
+    <!-- Sticky Search & Category Filter Section -->
+    <div class="sticky top-0 bg-white/95 backdrop-blur z-20 px-4 pt-3 pb-2 border-b border-gray-100 shadow-sm">
+      
+      <!-- Live Search Bar -->
+      <div class="relative mb-3">
+        <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Search products, desks, lamps..." 
+          class="w-full pl-9 pr-8 py-2 bg-gray-100 border border-transparent rounded-full text-xs text-gray-800 placeholder-gray-400 focus:bg-white focus:border-emerald-600 focus:outline-none transition"
+          oninput="handleSearch()"
+        />
+        <button id="clearSearch" onclick="clearSearchInput()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
+
+      <!-- Horizontal Scroll Category Tabs -->
+      <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 text-xs">
+        <button onclick="filterCategory('All')" class="category-btn active-tab px-3.5 py-1.5 rounded-full whitespace-nowrap bg-gray-100 text-gray-600 transition">✨ All Finds</button>
+        <button onclick="filterCategory('Workspace')" class="category-btn px-3.5 py-1.5 rounded-full whitespace-nowrap bg-gray-100 text-gray-600 transition">💼 Workspace</button>
+        <button onclick="filterCategory('Organizers')" class="category-btn px-3.5 py-1.5 rounded-full whitespace-nowrap bg-gray-100 text-gray-600 transition">📦 Organizers</button>
+        <button onclick="filterCategory('Lighting')" class="category-btn px-3.5 py-1.5 rounded-full whitespace-nowrap bg-gray-100 text-gray-600 transition">💡 Lighting</button>
+      </div>
+    </div>
+
+    <!-- Product Grid Section -->
+    <main class="flex-1 p-4">
+      <div class="flex justify-between items-center mb-3 px-1">
+        <span id="productCount" class="text-xs font-bold text-gray-500 uppercase tracking-wider">Top Curated Items</span>
+        <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium"><i class="fab fa-amazon mr-1"></i>Official Affiliate Links</span>
+      </div>
+
+      <!-- 2-Column Product Grid -->
+      <div id="productGrid" class="grid grid-cols-2 gap-3">
+        <!-- Products will be dynamically rendered via JS -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="hidden text-center py-12 px-4">
+        <i class="fas fa-search-minus text-3xl text-gray-300 mb-2"></i>
+        <p class="text-sm font-semibold text-gray-600">No products found</p>
+        <p class="text-xs text-gray-400 mt-1">Try searching with a different keyword or tab.</p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 border-t border-gray-100 text-[11px] text-gray-400 bg-gray-50">
+      <p>© 2026 Eco-Smart Living. As an Amazon Associate I earn from qualifying purchases.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Embedded Data from Link Sp amazon.xlsx
+    const productsData = [
+      { id: 1, title: "Claiks Electric Standing Desk, 32x19 Inch, Black", category: "Workspace", price: "$59.98", rating: "4.2", img: "https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0H45TV33J", badge: "Limited Deal" },
+      { id: 2, title: "55 X 20 Inch Computer Desk, Power Outlets, USB-C, Rustic Brown", category: "Workspace", price: "$67.46", rating: "4.6", img: "https://m.media-amazon.com/images/I/81vkmfK0hXL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0FZ566DBT", badge: "Popular" },
+      { id: 3, title: "YIHAYO Electric Standing Desk, 48 x 24 Inches Adjustable Height", category: "Workspace", price: "$89.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/71MgPlTkWeL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CY7X73Z6", badge: "" },
+      { id: 4, title: "DUMOS 32 Inch Small Computer Desk for Home Office Bedroom", category: "Workspace", price: "$19.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/71rL0QguLAL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0GYPQ75WH", badge: "Best Seller" },
+      { id: 5, title: "DUMOS 47\" L Shaped Computer Desk with Storage Shelves", category: "Workspace", price: "$41.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/71X8kM3sH1L._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CX8G1Y7C", badge: "" },
+      { id: 6, title: "Huuger Folding Desk for Small Spaces, 31.5 Inch Foldable Table", category: "Workspace", price: "$56.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/81P2nFfW3GL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0C3R8H8KK", badge: "Space Saver" },
+      { id: 7, title: "Motumen Led Desk Lamp for Home Office, Eye-Care Light Clamp", category: "Lighting", price: "$21.99", rating: "4.6", img: "https://m.media-amazon.com/images/I/61N+Vw4JbHL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0D189YJ8P", badge: "Top Pick" },
+      { id: 8, title: "Led Architect Desk Lamp with Clamp, Dual Screen Work Light 24W", category: "Lighting", price: "$49.99", rating: "4.6", img: "https://m.media-amazon.com/images/I/71o32LdM-3L._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0BNM7L99S", badge: "" },
+      { id: 9, title: "HUANUO 32\" X 21\" Electric Standing Desk with 2 Drawers", category: "Workspace", price: "$89.98", rating: "4.5", img: "https://m.media-amazon.com/images/I/71rD7H19GML._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0C33PZ9N4", badge: "Storage Desk" },
+      { id: 10, title: "Agilestic 26*16 Inch Height Adjustable Standing Desk", category: "Workspace", price: "$79.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/71VfR92b7IL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CNGNRH37", badge: "" },
+      { id: 11, title: "Lufeiya Gaming Desk with Fabric Drawers, 47 Inch Office Table", category: "Workspace", price: "$69.99", rating: "4.6", img: "https://m.media-amazon.com/images/I/81I2U3vCgNL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B09TR7V1R9", badge: "" },
+      { id: 12, title: "OLIXIS 39 Inch L Shaped Desk, Corner Gaming Computer Desk", category: "Workspace", price: "$49.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/81fHInXhSPL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0BV6J8F3Y", badge: "" },
+      { id: 13, title: "Small Portable Rolling Standing Desk on Wheels with Drawers", category: "Organizers", price: "$45.99", rating: "4.3", img: "https://m.media-amazon.com/images/I/71R2MUn4dXL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0CL9Q4P4C", badge: "Mobile" },
+      { id: 14, title: "Govee Smart Light Bar, RGBICWW TV Lights for Living Room", category: "Lighting", price: "$39.99", rating: "4.5", img: "https://m.media-amazon.com/images/I/61S194XJvTL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0963L31R8", badge: "Smart Light" },
+      { id: 15, title: "Dual Monitor Stand Riser with Storage Drawer & Pen Holders", category: "Organizers", price: "$29.99", rating: "4.7", img: "https://m.media-amazon.com/images/I/71m0f5f+BvL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B08CZ8M4J3", badge: "Must Have" },
+      { id: 16, title: "Desk Lamp with Wireless Charger & Digital Clock", category: "Lighting", price: "$32.99", rating: "4.4", img: "https://m.media-amazon.com/images/I/61NfT28f5WL._AC_UL320_.jpg", link: "https://www.amazon.com/dp/B0B79N8S5Q", badge: "Multi-function" }
+    ];
+
+    let currentCategory = 'All';
+    let searchQuery = '';
+
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      const emptyState = document.getElementById('emptyState');
+      const countEl = document.getElementById('productCount');
+      
+      const filtered = productsData.filter(p => {
+        const matchesCategory = (currentCategory === 'All') || (p.category === currentCategory);
+        const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      countEl.innerText = `${filtered.length} Items Found`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.innerHTML = filtered.map(p => `
+        <div class="bg-white border border-gray-100 rounded-xl p-2.5 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="relative w-full aspect-square bg-gray-50 rounded-lg overflow-hidden mb-2">
+              <img src="${p.img}" alt="${p.title}" class="w-full h-full object-contain p-1" loading="lazy" />
+              ${p.badge ? `<span class="absolute top-1 left-1 bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">${p.badge}</span>` : ''}
+            </div>
+            <h3 class="text-xs font-medium text-gray-800 line-clamp-2 leading-snug mb-1">${p.title}</h3>
+          </div>
+          <div class="mt-2">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-extrabold text-gray-900">${p.price}</span>
+              <span class="text-[10px] text-amber-500 font-semibold"><i class="fas fa-star mr-0.5"></i>${p.rating}</span>
+            </div>
+            <a href="${p.link}" target="_blank" rel="noopener font-semibold" class="block w-full py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-[11px] font-bold text-center rounded-lg shadow-sm transition">
+              <i class="fab fa-amazon mr-1"></i>Shop Amazon
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText.includes('All'))) {
+          btn.classList.add('active-tab');
+        } else {
+          btn.classList.remove('active-tab');
+        }
+      });
+      renderProducts();
+    }
+
+    function handleSearch() {
+      const input = document.getElementById('searchInput');
+      const clearBtn = document.getElementById('clearSearch');
+      searchQuery = input.value;
+      
+      if (searchQuery.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderProducts();
+    }
+
+    function clearSearchInput() {
+      const input = document.getElementById('searchInput');
+      input.value = '';
+      searchQuery = '';
+      document.getElementById('clearSearch').classList.add('hidden');
+      renderProducts();
+    }
+
+    // Initial Render
+    renderProducts();
+  </script>
+</body>
+</html>
