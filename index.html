@@ -1,207 +1,164 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco-Smart Living</title>
-  <style>
-    /* BẢNG MÀU THUỘC CHỦ ĐỀ ECO-SMART */
-    :root {
-      --bg-main: #F7F5EE;        /* Nền kem ấm lấy từ logo */
-      --card-bg: #FFFFFF;        /* Nền thẻ sản phẩm */
-      --primary-green: #4E8752;  /* Xanh lá chính */
-      --primary-hover: #3D6E40;  /* Xanh đậm khi hover */
-      --text-dark: #2B342B;      /* Chữ xám đen tự nhiên */
-      --text-muted: #6B7280;     /* Chữ phụ */
-      --accent-yellow: #F4B41A;  /* Vàng ấm icon/star */
-    }
-
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-dark);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-
-    /* HEADER & LOGO */
-    .header {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .logo-container {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 12px auto;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .logo-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .brand-title {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--text-dark);
-      margin: 0 0 6px 0;
-    }
-
-    .brand-subtitle {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin: 0;
-    }
-
-    /* THANH TAB PHÂN LOẠI (SỬA LỖI KÉO TRÊN PC/MOBILE) */
-    .tabs-wrapper {
-      width: 100%;
-      max-width: 1000px;
-      margin: 20px auto;
-      overflow-x: auto;
-      white-space: nowrap;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch;
-      cursor: grab;
-    }
-
-    /* Tùy chỉnh thanh cuộn mảnh gọn */
-    .tabs-wrapper::-webkit-scrollbar {
-      height: 6px;
-    }
-    .tabs-wrapper::-webkit-scrollbar-thumb {
-      background-color: rgba(78, 135, 82, 0.3);
-      border-radius: 10px;
-    }
-
-    .tab-btn {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-right: 10px;
-      background-color: #EBE7DC;
-      color: var(--text-dark);
-      border-radius: 20px;
-      border: none;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.2s ease;
-    }
-
-    .tab-btn.active, .tab-btn:hover {
-      background-color: var(--primary-green);
-      color: #FFFFFF;
-    }
-
-    /* LƯỚI SẢN PHẨM */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .product-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .product-img {
-      width: 100%;
-      height: 200px;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      background-color: #FAF8F5;
-    }
-
-    .btn-check-price {
-      background-color: var(--primary-green);
-      color: white;
-      text-decoration: none;
-      text-align: center;
-      padding: 10px;
-      border-radius: 8px;
-      font-weight: bold;
-      display: block;
-      margin-top: 12px;
-    }
-    
-    .btn-check-price:hover {
-      background-color: var(--primary-hover);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Smart Living | Bio Link Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="referrer" content="no-referrer">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F7F5EE; color: #2B342B; }
+        .product-card {
+            background: #FFFFFF;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.08);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
+<body class="min-h-screen pb-16 antialiased">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo-container">
-      <!-- Thay file logo ngôi nhà lá xanh vào đây -->
-      <img src="logo-eco-smart.png" alt="Eco-Smart Living Logo">
-    </div>
-    <h1 class="brand-title">Eco–Smart Living</h1>
-    <p class="brand-subtitle">Smart Choices • Minimalist & Eco-Friendly Home Solutions</p>
-  </div>
+    <!-- Header Section -->
+    <header class="max-w-4xl mx-auto px-4 pt-10 text-center">
+        <!-- Logo -->
+        <div class="relative inline-block mb-3">
+            <div class="w-24 h-24 rounded-full bg-[#EBE7DC] border-4 border-white shadow-md overflow-hidden flex items-center justify-center mx-auto">
+                <img src="logo.png" alt="Eco-Smart Living Logo" onerror="this.onerror=null; this.src='https://api.iconify.design/lucide:home.svg?color=%234E8752';" class="w-full h-full object-cover">
+            </div>
+            <span class="absolute bottom-0 right-0 bg-[#4E8752] text-white p-1 rounded-full border-2 border-white shadow">
+                <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+            </span>
+        </div>
 
-  <!-- THANH TAB CATEGORY (KÉO/SCROLL MƯỢT TRÊN PC & MOBILE) -->
-  <div class="tabs-wrapper" id="tabsWrapper">
-    <button class="tab-btn active">Eco Kitchen (20)</button>
-    <button class="tab-btn">Smart Workspace (20)</button>
-    <button class="tab-btn">Smart Closet (20)</button>
-    <button class="tab-btn">Laundry & Eco (20)</button>
-    <button class="tab-btn">Smart Storage (20)</button>
-  </div>
+        <h1 class="text-3xl font-extrabold text-[#2B342B] tracking-tight">Eco-Smart Living</h1>
+        <p class="text-sm font-medium text-slate-500 mt-1">Smart Choices • Minimalist & Eco-Friendly Home Solutions</p>
 
-  <!-- DỮ LIỆU SẢN PHẨM -->
-  <div class="product-grid">
-    <div class="product-card">
-      <div>
-        <!-- Cập nhật lại hình thớt gỗ chuẩn từ Amazon/Excel -->
-        <img class="product-img" src="https://m.media-amazon.com/images/I/71Y8R6R+VlL._AC_SL1500_.jpg" alt="Astercook Bamboo Cutting Board">
-        <span style="background: #E8F5E9; color: var(--primary-green); font-size: 12px; padding: 4px 8px; border-radius: 4px; font-weight: bold;">🔥 Best Seller</span>
-        <h3 style="font-size: 15px; margin: 8px 0;">Astercook Bamboo Cutting Board with Compartment Trays</h3>
-        <p style="font-size: 13px; color: var(--text-muted);">⭐ 4.5 • 📦 20,000+/mo</p>
-      </div>
-      <div>
-        <div style="font-size: 18px; font-weight: bold; color: var(--primary-green);">$24.99</div>
-        <a href="#" class="btn-check-price">Check Price ↗</a>
-      </div>
-    </div>
-  </div>
+        <!-- Price Fluctuation Notice -->
+        <div class="mt-4 max-w-2xl mx-auto p-3.5 bg-amber-50/90 border border-amber-200/90 rounded-2xl text-left text-xs text-amber-900 flex items-start gap-3 shadow-sm">
+            <i data-lucide="info" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+            <div>
+                <strong>Price Notice:</strong> Product prices are subject to change depending on supplier promotions. Click <strong>"Check Price"</strong> to view real-time deals on Amazon.
+            </div>
+        </div>
 
-  <!-- SCRIPT HỖ TRỢ KÉO MOUSE DRAG TRÊN PC CHO THANH TAB -->
-  <script>
-    const slider = document.getElementById('tabsWrapper');
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+        <!-- Search Bar & Category Tabs -->
+        <div class="mt-6 max-w-2xl mx-auto space-y-3.5">
+            <div class="relative">
+                <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search products, keywords (e.g. Bamboo, Desk)..." 
+                    class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#4E8752] shadow-sm">
+                <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5"></i>
+            </div>
+            
+            <!-- Category Tabs (Draggable & Scrollable) -->
+            <div id="tabsWrapper" class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto text-xs no-scrollbar py-1">
+                <button onclick="setTab('kitchen')" id="tab-kitchen" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-bold bg-[#4E8752] text-white shadow-md">Eco Kitchen (20)</button>
+                <button onclick="setTab('workspace')" id="tab-workspace" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Smart Workspace (20)</button>
+                <button onclick="setTab('closet')" id="tab-closet" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Smart Closet (20)</button>
+                <button onclick="setTab('cleaning')" id="tab-cleaning" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Laundry & Eco (20)</button>
+                <button onclick="setTab('storage')" id="tab-storage" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Smart Storage (20)</button>
+            </div>
+        </div>
+    </header>
 
-    slider.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-    });
-    slider.addEventListener('mouseleave', () => isDown = false);
-    slider.addEventListener('mouseup', () => isDown = false);
-    slider.addEventListener('mousemove', (e) => {
-      if(!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2;
-      slider.scrollLeft = scrollLeft - walk;
-    });
-  </script>
+    <!-- Main Grid -->
+    <main class="max-w-4xl mx-auto px-4 mt-8">
+        <div class="flex items-center justify-between mb-4">
+            <span id="productCountHeader" class="text-xs font-bold uppercase tracking-wider text-slate-400">Showing 20 products</span>
+            <span class="text-xs text-[#4E8752] font-semibold flex items-center gap-1 bg-emerald-50/80 px-2.5 py-1 rounded-lg border border-emerald-100">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Tag Verified: ecosmart0f5-20
+            </span>
+        </div>
 
+        <div id="productContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+    </main>
+
+    <script>
+        const AFFILIATE_TAG = "ecosmart0f5-20";
+        const rawCategories = {"kitchen": [{"title": "Lipper International Bamboo Wood Utensil Holder Storage Box for Cooking Tools, Makeup, or Office Supplies, 4\\\" x 9 1/4\\\" x 3\\\"", "img": "https://m.media-amazon.com/images/I/81He6cv-01L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0CBNHRQSZ"}, {"title": "Set of 6 Bamboo Drawer Organizer Storage Box, Adjustable Cutlery Drawer Organizer, Silverware Organizer Multi-Use for Office, Home, Kitchen, Bedroom, Bathroom", "img": "https://m.media-amazon.com/images/I/71ZbayiVa9L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B097P34VB9"}, {"title": "SpaceAid Bamboo Drawer Dividers with Inserts and Labels, Kitchen Adjustable Drawer Organizers, Expandable Organization for Home, Office, Dressers, 4 Dividers with 9 Inserts (17\\\"-22\\\" Natural)", "img": "https://m.media-amazon.com/images/I/71TDazJeZHL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B094624Q8Z"}, {"title": "VaeFae 6-Pack Adjustable Bamboo Drawer Dividers, Expandable Drawer Organizer for Kitchen Utensils, Clothes, Bathroom, Office \u2013 Fits Drawer Interiors 16.6\\\" to 21.8\\\"", "img": "https://m.media-amazon.com/images/I/81PF3AQ2u5L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B08B397DMF"}, {"title": "Lipper International 8180S Bamboo Wood Stacking Drawer Organizer Box, 3\\\" x 6\\\", Set of 2", "img": "https://m.media-amazon.com/images/I/81KOB8pry3S._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B000QWFOLC"}, {"title": "Kitchen Drawer Organizer Bins, Stackable Bamboo Deep Drawer Organizer for Silverware, Utensils, Cutlery, Flatware, Junk Drawer, Dresser, Bathroom, 15\\\" x 6\\\" x 2.5\\\" (Set of 2)", "img": "https://m.media-amazon.com/images/I/81AftLgyLyL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0CH9MWZBH"}, {"title": "2 Pack Bamboo Food Pantry Organizers, 4 Section", "img": "https://m.media-amazon.com/images/I/71CHiWvc-KL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0GY49523Q"}, {"title": "Lipper International 8385 Bamboo Wood Stacking Drawer Organizer Box, 12\\\" x 6\\\"", "img": "https://m.media-amazon.com/images/I/718NA4cHW7L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B079Y8B87R"}, {"title": "SpaceAid Bamboo Pull Out Spice Rack Organizer for Cabinet, Heavy Duty Slide Out Seasoning Kitchen Pantry Sliding Vertical Organization, 7.6\\\" Wide, 3 Drawers(2\\\" Wide), 2-Tier, Natural", "img": "https://m.media-amazon.com/images/I/71qVkT+f1DL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0F8NGPH76"}, {"title": "mHomeAid Bag Storage Organizer - Bamboo Food Plastic Baggie Holder, Dispenser, and Container for Kitchen Drawer - Fits Ziplock and Ziploc Gallon, Quart, Sandwich & Snack Sized Slider Bags (Bamboo)", "img": "https://m.media-amazon.com/images/I/71KAnhQjvTL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0DPFCQ2P9"}, {"title": "5-Piece Bamboo Drawer Organizer Storage Boxes Kitchen Multi-purpose Storage Dividers Drawer Organizer Set for Office Vanity Closet & Bathroom Kitchen Office Jewelry Cosmetics", "img": "https://m.media-amazon.com/images/I/716ZcbMFg-L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0GKMGGG2G"}, {"title": "Simple Trending Bamboo Cabinet Organizer Shelf, Set of 2 Kitchen Counter Shelves, Stackable Expandable Spice Rack Kitchen Storage, Black and Natural Beige", "img": "https://m.media-amazon.com/images/I/61W0YZmHQ7L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0G4Z39LNJ"}, {"title": "SpaceAid WrapNeat 3 in 1 Wrap Organizer with Cutter and Labels, Plastic Wrap, Aluminum Foil and Wax Bamboo Dispenser for Kitchen Storage Organization Holder for 12\\\" Roll (Natural)", "img": "https://m.media-amazon.com/images/I/71a+-ANxPwL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B09FPFTMVX"}, {"title": "2 Set Large Stackable Wire Basket with Bamboo Tops & Tag- Pantry Organizer and Storage Bins, Kitchen Counter Cabinet Shelf Countertop Under Sink Organizing for Food Snack Produce Onion Potato Bread", "img": "https://m.media-amazon.com/images/I/81YQk2FUjYL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0D83ZR4D6"}, {"title": "Utoplike 4 Pcs Bamboo Kitchen Drawer Dividers, Large Drawers Organizers", "img": "https://m.media-amazon.com/images/I/71LrbpWCJiL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B07HQMZ7HH"}, {"title": "4 Pcs Bamboo Wooden Dish Rack, Plate Organizer for Cabinet Space Saver and Kitchen Counter, Bowl/Cup/Pot Lid/Cutting Board Drying Holder (4 Slots)", "img": "https://m.media-amazon.com/images/I/61V3EAVezzL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0DZT9TLQK"}, {"title": "Lazy Susan Organizer Homerays 9 Inch Non-Skid Bamboo Lazy Susan for Kitchen Rotating Spice Rack for Kitchen Cabinet, Wood Turntable for Kitchen Countertop Organizer", "img": "https://m.media-amazon.com/images/I/71h7b3sPU-L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0BNVG6QMF"}, {"title": "Kootek 8Pcs Bamboo Drawer Organizer 4-Size Kitchen Storage Box for Flatware", "img": "https://m.media-amazon.com/images/I/71KJiywQKvL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B08LQJL4GY"}, {"title": "Greenual Bamboo Dish Drying Rack with Utensil Holder, 3 Tier Collapsible Dish Rack, Wooden Dish Racks for Kitchen Counter, Large Folding Drying Holder with Absorbent Dish Drying Mat", "img": "https://m.media-amazon.com/images/I/71aR6Cw8HhL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0CF7YBB5N"}, {"title": "Swedish Dishcloth 10 Pack, Reusable Washable Paper Towels, Sponge Dish Cloth for Counters & Washing Dishes, Super Absorbent, Fast Dry, Non-Scratch, 5 Colors Assorted", "img": "https://m.media-amazon.com/images/I/71EuawmmhIL._AC_UL320_.jpg", "price": 12.59, "rating": "4.5", "sales": "1,000+", "asin": "B0GVF9HP1Y"}], "workspace": [{"title": "Claiks Electric Standing Desk, 32x19 Inch, Black", "img": "https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg", "price": 59.98, "rating": "4.2", "sales": "600+", "asin": "B0H45TV33J"}, {"title": "55 X 20 Inch Computer Desk, Power Outlets, USB-C, Rustic Brown", "img": "https://m.media-amazon.com/images/I/81vkmfK0hXL._AC_UL320_.jpg", "price": 67.46, "rating": "4.6", "sales": "300+", "asin": "B0FZ566DBT"}, {"title": "YIHAYO Electric Standing Desk, 48 x 24 Inches Stand Up Desk with Splice Board, Adjustable Height Desk, Computer Desk for Home Office, Black Frame/Rustic Brown Top", "img": "https://m.media-amazon.com/images/I/71MgPlTkWeL._AC_UL320_.jpg", "price": 89.99, "rating": "4.5", "sales": "500+", "asin": "B0CY7X73Z6"}, {"title": "DUMOS 32 Inch Small Computer Desk, Gaming Desks for Home Office Bedroom", "img": "https://m.media-amazon.com/images/I/71rL0QguLAL._AC_UL320_.jpg", "price": 19.99, "rating": "4.5", "sales": "7K+", "asin": "B0GYPQ75WH"}, {"title": "DUMOS 47\\\" L Shaped Computer Desk, Corner Desks with Storage Shelves, Brown", "img": "https://m.media-amazon.com/images/I/71G7gJY5FYL._AC_UL320_.jpg", "price": 41.99, "rating": "4.4", "sales": "200+", "asin": "B0HB4S9T61"}, {"title": "Huuger Folding Desk for Small Spaces, 31.5 Inch Foldable Computer Table", "img": "https://m.media-amazon.com/images/I/815LJYab8mL._AC_UL320_.jpg", "price": 56.99, "rating": "4.4", "sales": "1K+", "asin": "B0F43TL3GT"}, {"title": "Motumen Led Desk Lamp for Home Office, Eye-Care Desk Light Clamp, Black", "img": "https://m.media-amazon.com/images/I/71CyRyEBOKL._AC_UL320_.jpg", "price": 21.99, "rating": "4.6", "sales": "2K+", "asin": "B0D4DG2CG2"}, {"title": "Led Desk Lamp for Office Home - Eye Caring Architect lamp with Clamp,Dual Screen Computer Monitor Work Smart Light: 24W 5 Color Flexible Adjustable Lighting Table Lamp for Study Drafting", "img": "https://m.media-amazon.com/images/I/616md8tdywL._AC_UL320_.jpg", "price": 49.99, "rating": "4.6", "sales": "3K+", "asin": "B0BRCJL4MM"}, {"title": "Led Desk Lamp with Clamp, Architect Desk Lamp for Home Office with Atmosphere Lighting, 24W Ultra Bright Auto Dimming Computer Light Stepless Dimming and Tempering LED Table Light", "img": "https://m.media-amazon.com/images/I/81f0B2GPxyL._AC_UL320_.jpg", "price": 49.99, "rating": "4.6", "sales": "2K+", "asin": "B0BNHNG5CY"}, {"title": "HUANUO 32\\\" X 21\\\" Electric Standing Desk with 2 Drawers, C-Clamp Mount Compatible, Height Adjustable Computer Desk, Home Office Stand Up Desk with 4 Preset Heights & 2 Hooks, Light Walnut", "img": "https://m.media-amazon.com/images/I/61KiSzFRt4L._AC_UL320_.jpg", "price": 89.98, "rating": "4.6", "sales": "500+", "asin": "B0G5MW8SKH"}, {"title": "Gaming Desk Computer Writing Table Student Art Modren Simple Style PC Wood Suitable Portable Desk for Home, Office", "img": "https://m.media-amazon.com/images/I/81o00URoZKL._AC_UL320_.jpg", "price": 80.99, "rating": "4.5", "sales": "1,000+", "asin": "B0GWHY7R4P"}, {"title": "Agilestic 26*16 Inch Height Adjustable Electric Standing Desk, Rustic Brown", "img": "https://m.media-amazon.com/images/I/71wscARk+5L._AC_UL320_.jpg", "price": 79.99, "rating": "4.2", "sales": "1,000+", "asin": "B0DY1FM258"}, {"title": "Lufeiya Black Gaming Desk with LED Lights and Power Outlets, 40 Inch Teen Writing Study Table Home Office Desks with Monitor Stand, Computer Desk with Charging Station USB Port, Black", "img": "https://m.media-amazon.com/images/I/71RSaS6bBCL._AC_UL320_.jpg", "price": 66.49, "rating": "4.4", "sales": "1K+", "asin": "B0D4PCD2PX"}, {"title": "Lufeiya Gaming Desk with Fabric Drawers, 47 Inch Computer Desk for Home Office, Modern Simple Study Writing Table PC Desks for Bedroom, Black", "img": "https://m.media-amazon.com/images/I/71-cYSzsWEL._AC_UL320_.jpg", "price": 69.99, "rating": "4.5", "sales": "400+", "asin": "B0DKHW5KR5"}, {"title": "Small Standing Desk with Storage, Height Adjustable Sit Stand Desk with Drawers, Mobile Office Desk with Wheels and Side Pocket, Adjustable Laptop Workstation for Home Office", "img": "https://m.media-amazon.com/images/I/81DSuefhptL._AC_UL320_.jpg", "price": 68.99, "rating": "4.4", "sales": "400+", "asin": "B0H2YL1BYX"}, {"title": "OLIXIS 39 Inch L Shaped Desk, Corner Computer Gaming Desks with Shelves", "img": "https://m.media-amazon.com/images/I/71evkKteXJL._AC_UL320_.jpg", "price": 41.99, "rating": "4.6", "sales": "1,000+", "asin": "B0H9FRLPWW"}, {"title": "Small Portable Rolling Standing Desk - 32 Inch Adjustable Mobile Stand Up Gaming Desks with 2 Fabric Drawers on Wheels, Couch Sofa Side Laptop Table with Storage for Home Office, Black", "img": "https://m.media-amazon.com/images/I/71CpoWvferL._AC_UL320_.jpg", "price": 75.99, "rating": "4.5", "sales": "800+", "asin": "B0DSL5LM22"}, {"title": "Sweetcrispy Electric Standing Desk, Computer Desk, 48x24 Inch", "img": "https://m.media-amazon.com/images/I/71GWwHisDvL._AC_UL320_.jpg", "price": 79.99, "rating": "4.2", "sales": "1,000+", "asin": "B0FJRS8BDN"}, {"title": "Limitless TotalDesk Portable Modern Workstation and Lap Desk with Adjustable Height & Tilt (Black)", "img": "https://m.media-amazon.com/images/I/51-eh899k1L._AC_UL320_.jpg", "price": 42.0, "rating": "4.4", "sales": "200+", "asin": "B09W44JQML"}, {"title": "VASAGLE Electric Standing Desk, Height Adjustable, 47.2 x 23.6 Inches", "img": "https://m.media-amazon.com/images/I/71oVjGOog9L._AC_UL320_.jpg", "price": 87.87, "rating": "4.2", "sales": "1,000+", "asin": "B0FSKWQH4Q"}], "closet": [{"title": "2\u2011Tier Bamboo Coffee Bar Organizer, Countertop Display Stand Shelf,Natural", "img": "https://m.media-amazon.com/images/I/81iA-GbI8UL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0FKTK1D98"}, {"title": "HOUSE DAY Space Saving Hanger Hooks 60 Pack, Clothes Hanger Connector Hooks", "img": "https://m.media-amazon.com/images/I/71+6Fh9qz5L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0C53MD1MS"}, {"title": "Pants Hangers Space Saving - 2 Pack Closet Organizer and Storage Jean Hangers, Stainless Steel Anti-Slip Clothes Hanger Scarf Holder for Pants Jeans Leggings Trousers Pant Rack, Black", "img": "https://m.media-amazon.com/images/I/81q1FgNPy7L._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0CYX497CJ"}, {"title": "Upgraded Closet Organizers and Storage, Stackable Closet Organizer Basket", "img": "https://m.media-amazon.com/images/I/71qU0gkBTYL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0CGJJJC4M"}, {"title": "NECAMOCU 2 Pack Bra Hanger for Closet Organizer, Premium Tank Top Hangers", "img": "https://m.media-amazon.com/images/I/710f-GufFYL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0DQ67STGL"}, {"title": "Tank Top Hanger with 40 Hooks for Closet Organizer, Premium Wood Bra Hanger", "img": "https://m.media-amazon.com/images/I/71LqRROpYyL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0C9ZY4XD6"}, {"title": "Mr. Pen- Bulk Space Saving Hangers for Clothes, 24 pcs, 5 Slots, Plastic", "img": "https://m.media-amazon.com/images/I/81miIn9t1qL._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0DBQ67SK4"}, {"title": "Utopia Home Space Saving Hangers 10 Pack \u2013 Magic Hanger Collapsible Black", "img": "https://m.media-amazon.com/images/I/81Co9YVBWgL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0GH7WTDRT"}, {"title": "Metal Tank Top Hanger 2 Pack, 360\u00b0 Swivel Closet Organizers and Storage", "img": "https://m.media-amazon.com/images/I/71+JXxNmkVL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0CS6M7Z71"}, {"title": "Space Saving Hangers for 48 Clothes, Reinforced Collapsible Hangers", "img": "https://m.media-amazon.com/images/I/71SWuFDVllL._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0DWXNTWVP"}, {"title": "BOOMIBOO Hanging Closet Organize and Shelves\uff0c5-Hanging Shelf with 2 Side Pockets\uff0cStorage Foldable \uff08Grey\uff09", "img": "https://m.media-amazon.com/images/I/71WIkiANaxL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0DHMJSDXM"}, {"title": "HOUSE DAY White Magic Space Saving Hangers, Premium Smart Hanger Organizer", "img": "https://m.media-amazon.com/images/I/71efg28lwyL._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B07QWPHX8G"}, {"title": "FeeraHozer Pants Hangers Non Slip 3 Pack Space Saving Hangers Multi-Layer Swing Arm Pants Hanger Stainless Steel Space Saver Hanger Closet Storage Organizer for Jeans Trouser Slacks Clothes (Black)", "img": "https://m.media-amazon.com/images/I/71VRvXdjrKL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B086J3WT37"}, {"title": "Tall Dresser 44\\'\\'H with Hanging Rack, 4 Drawers Small Closet Dresser for Bedroom, Reversible Fabric Chest of Drawers with Clothes Rack, Tall Storage Tower, Sturdy Frame, White", "img": "https://m.media-amazon.com/images/I/81lTxUihoML._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0DK1FP7LF"}, {"title": "4 Pack Stackable Closet Storage Basket - Stackable Storage Bins", "img": "https://m.media-amazon.com/images/I/71aQjzoLLkL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0CHVKCWS7"}, {"title": "Clothes Rack - 33.0\\\" x 12.2\\\" x 79.5\\\" Clothing Rack with Shelves & Wheels, Multi-Functional Wardrobe Closet with Hooks, Sturdy Metal Garment Rack for Bedroom, Laundry, Balcony (Black)", "img": "https://m.media-amazon.com/images/I/81EBRgxU35L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0DZXJ1F5L"}, {"title": "360-Degree Rotating Multi-Hook Hanger - Space-Saving Organizer for Closet, Scarves, Ties, Bags & Accessories", "img": "https://m.media-amazon.com/images/I/61KyL41z1pL._AC_UL320_.jpg", "price": 360.0, "rating": "4.5", "sales": "1,000+", "asin": "B0H2Z57XXZ"}, {"title": "Legging Hangers for Closet Organizer, Hat Hangers for Closet 2 Pack with 10 Clips Holds 20 Leggings, Legging Hanger, Pants Storage Organizer Suitable for Socks, Panties, Underwear, Pants", "img": "https://m.media-amazon.com/images/I/71pkPzh-IyL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0DX71B5LT"}, {"title": "2 Pack Tank Top Hanger Space Saving, 360\u00b0 Rotating Closet Organizers and Storage, 6 Tier Metal Bra Organizer with 24 Hanging Hooks, Small Space Solutions, RV Apartment College Dorm Room Essentials", "img": "https://m.media-amazon.com/images/I/71qsDDSVLEL._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0FFY357RW"}, {"title": "Velvet Pants Hangers Space Saving, 2-Pack Multi-Tier Closet Organizers,Grey", "img": "https://m.media-amazon.com/images/I/71e1b+XTObL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0CPPF1RTD"}], "cleaning": [{"title": "Rolling Computer Desk, 31.5 Inch Small Desks For Small Space, Portable Small Computer Desk with Monitor Stand & 3-Tier Storage, Portable Desk on Wheels for Writing, Home Office, Small Desk for Bedroom", "img": "https://m.media-amazon.com/images/I/71TWXYC0rHL._AC_UL320_.jpg", "price": 79.17, "rating": "4.2", "sales": "1,000+", "asin": "B0FB82W4F6"}, {"title": "Pamray 47 Inch Reversible L Shaped Gaming Desk Corner Computer Desk with Storage Bag Home Office Table for Writing Study Black", "img": "https://m.media-amazon.com/images/I/81PRz1dHuUL._AC_UL320_.jpg", "price": 59.98, "rating": "4.1", "sales": "800+", "asin": "B0GKRTGRRK"}, {"title": "39.4 Inch Computer Office Desk with Power Outelts and USB-C Port, Reversible Gaming Desk with 4 Fabric Drawers, Work Study Desk Work from Home, Black", "img": "https://m.media-amazon.com/images/I/71Ucc4Qv7hL._AC_UL320_.jpg", "price": 69.99, "rating": "4.3", "sales": "50+", "asin": "B0GXYGJK7Z"}, {"title": "Agilestic 48*24 Inch Height Adjustable Electric Standing Desk, Rustic Brown", "img": "https://m.media-amazon.com/images/I/71fSeXNXQPL._AC_UL320_.jpg", "price": 89.99, "rating": "4.5", "sales": "1K+", "asin": "B0CSPJR8W8"}, {"title": "DUMOS 48 Inch Electric Standing Desk, Memory Adjustable Home Office Desk", "img": "https://m.media-amazon.com/images/I/71GVWo-3wdL._AC_UL320_.jpg", "price": 78.93, "rating": "4.2", "sales": "400+", "asin": "B0G3WZ7H6T"}, {"title": "snsok Smart Desk Lamp with Dual USB Charging (Type-C/USB-A) & 2 AC Outlets, Digital Clock, Temperature Display, 5 Color Modes, 5 Brightness, Adjustable - for Office, Bedroom, Dorm Room, Study", "img": "https://m.media-amazon.com/images/I/61wCdSh7MOL._AC_UL320_.jpg", "price": 39.79, "rating": "4.6", "sales": "1,000+", "asin": "B0FKN2N82F"}, {"title": "Desk Organizers and Accessories, Dual Monitor Stand Riser with Drawer and 2 Pen Holders, Desk Shelf Computer Racks for Office Workspace Organizers, Desktop Organization (Black)", "img": "https://m.media-amazon.com/images/I/71vIgL35wZL._AC_UL320_.jpg", "price": 24.29, "rating": "4.6", "sales": "4K+", "asin": "B0F5PPDTVR"}, {"title": "Desk Lamp with Wireless Charger: USB Charging Port, Table Lamp with Clock, Desk Lamps for Home Office College Dorm Room Essentials", "img": "https://m.media-amazon.com/images/I/71Lg-bVp8JL._AC_UL320_.jpg", "price": 24.69, "rating": "4.4", "sales": "1K+", "asin": "B08BL9DWXJ"}, {"title": "deeloop LED Desk Lamp, CRI95+ Eye-Care Light, Auto Dimming, Clamp Lamp", "img": "https://m.media-amazon.com/images/I/61SPzTn4RxL._AC_UL320_.jpg", "price": 59.99, "rating": "4.7", "sales": "1,000+", "asin": "B0DQWQ3HS2"}, {"title": "Claiks 48 x 24 Inch White Electric Standing Desk", "img": "https://m.media-amazon.com/images/I/61KhMuJOgtL._AC_UL320_.jpg", "price": 89.98, "rating": "4.2", "sales": "50+", "asin": "B0H44BHLVX"}, {"title": "Clamp on Mouse Platform, Clip on Mouse Pad, Rotating 360, Easy Slide Out Tray, Suitable Up to for 1.5\\\" Thickness Desk, for Home, Office to Save Space (Black)", "img": "https://m.media-amazon.com/images/I/81zcLxrucrL._AC_UL320_.jpg", "price": 26.99, "rating": "4.3", "sales": "200+", "asin": "B072JLB1DP"}, {"title": "Lufeiya White Computer Desk with LED Lights and Power Outlets, 40 Inch Home Office Desks with Monitor Stand, Teen Writing Study Table Gaming Desk with Charging Station, White", "img": "https://m.media-amazon.com/images/I/61PBRkuz3CL._AC_UL320_.jpg", "price": 74.98, "rating": "4.4", "sales": "200+", "asin": "B0D4PB95R8"}, {"title": "Desk Organizer with Cup & Headphone Holder, Clamp-On", "img": "https://m.media-amazon.com/images/I/61t4FCLsZ4L._AC_UL320_.jpg", "price": 15.99, "rating": "4.6", "sales": "1,000+", "asin": "B09MDW5V38"}, {"title": "HOOBRO Computer Desk, 31.5 Inch Small Desk with Power Outlet, Writing Table with USB Charging Ports and 3 Hooks for Home Office, Study Room, Bedroom, Easy to Assemble, Rustic Brown and Black BF40UDN01", "img": "https://m.media-amazon.com/images/I/71di4f+RiML._AC_UL320_.jpg", "price": 49.99, "rating": "4.5", "sales": "200+", "asin": "B0BNNBJPMH"}, {"title": "Govee Smart Light Bar, RGBICWW TV Lights for Living Room, Gaming, Black", "img": "https://m.media-amazon.com/images/I/71VYYSAObdL._AC_UL320_.jpg", "price": 39.99, "rating": "4.6", "sales": "5K+", "asin": "B096WZXKZP"}, {"title": "Desk Organizer with Wireless Charger, Digital Clock, Thermometer", "img": "https://m.media-amazon.com/images/I/91wmMTevBZL._AC_UL320_.jpg", "price": 37.99, "rating": "4.2", "sales": "1,000+", "asin": "B09CSYNVCD"}, {"title": "HOOBRO Small Computer Desk, 28.3\\\" Desk for Small Spaces, Office Desk with Power Outlet & Adjustable Monitor Stand, Compact Desk with Storage, Writing Table for Bedroom, Office, Rustic Brown BF38UDN01", "img": "https://m.media-amazon.com/images/I/61vlSo8ggBL._AC_UL320_.jpg", "price": 62.99, "rating": "4.6", "sales": "1,000+", "asin": "B0GL1ZNM2Q"}, {"title": "IHAO Smart LED Desk Lamp with Wireless Charger & Bluetooth Speaker, 15W Fast Charging Station for Phone & Earbuds Touch Control 3 Light Modes Alarm Clock Adjustable Eye-CareTable Lamp-HYT1772 Black", "img": "https://m.media-amazon.com/images/I/61U9qqyO86L._AC_UL320_.jpg", "price": 41.71, "rating": "4.5", "sales": "1,000+", "asin": "B0GCZJ3MTK"}, {"title": "Desk Organizer and Accessories, 2-Tier Computer Monitor Stand Rise with Storage Drawer & 2 Pen Holders, Laptop & Printer Stand for Desktop, Workspace Organizers for Office Supplies (Brown)", "img": "https://m.media-amazon.com/images/I/71TStawrUIL._AC_UL320_.jpg", "price": 23.99, "rating": "4.5", "sales": "200+", "asin": "B0F9LKWRJZ"}, {"title": "Small Folding Computer Desk \u2013 Portable 35.8 Inch Foldable Laptop Table, No-Assembly, Collapsible and Compact for Easy Storage, Lightweight for Small Spaces, Craft and Study Use, Dark Walnut", "img": "https://m.media-amazon.com/images/I/61tlIk4ZPJL._AC_UL320_.jpg", "price": 49.93, "rating": "4.6", "sales": "800+", "asin": "B0DWMZTJBV"}], "storage": [{"title": "(6 used & new offers)", "img": "https://m.media-amazon.com/images/I/71uHQi+qfdL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0CBND3XLM"}, {"title": "4 Pack Qtip Holder Dispenser with Bamboo Lids - 10 oz Clear Plastic Apothecary Jar Containers for Vanity Makeup Organizer Storage - Bathroom Accessories Set for Cotton Swab, Ball, Pads, Floss", "img": "https://m.media-amazon.com/images/I/814n4DwmYxL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B09KLPLCRF"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/71-gr9Xgp-L._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0GCY6CPZV"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/71fQCaeRhML._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0F7LKDJVJ"}, {"title": "(3+ used & new offers)", "img": "https://m.media-amazon.com/images/I/71HYX9Sl+vL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0BTKFQM5R"}, {"title": "(3+ used & new offers)", "img": "https://m.media-amazon.com/images/I/81amM2L5oiL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B086VVGHMP"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/71s1bg9wLZL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B07RGGYLGY"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/81lvMLA4TCL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0FF58GL1K"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/71161RDawcL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0G1HV6HRT"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/71cHOIQgApL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B0GXNJCQNS"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/81HYHjupOQL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "26+", "asin": "B09YJ7TSYM"}, {"title": "(2+ used & new offers)", "img": "https://m.media-amazon.com/images/I/81naYU8rKRL._AC_UL320_.jpg", "price": 24.99, "rating": "4.5", "sales": "1,000+", "asin": "B0FB8SWH9G"}, {"title": "(3+ used & new offers)", "img": "https://m.media-amazon.com/images/I/71KCOflKbnL._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0B4W7X7T2"}, {"title": "(2 used & new offers)", "img": "https://m.media-amazon.com/images/I/81EiJJkHJmL._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0FH9WSDT9"}, {"title": "(2 new offers)", "img": "https://m.media-amazon.com/images/I/61eaMNfbvGL._AC_UL320_.jpg", "price": 9.0, "rating": "4.5", "sales": "1,000+", "asin": "B09GBDQVGY"}, {"title": "(4+ used & new offers)", "img": "https://m.media-amazon.com/images/I/716auOs+I9L._AC_UL320_.jpg", "price": 0.0, "rating": "4.5", "sales": "1,000+", "asin": "B0CQ58G9TD"}, {"title": "DUMOS 40-Inch Gaming Computer Desk with Drawers for Home Office, Black", "img": "https://m.media-amazon.com/images/I/71f61vwCqzL._AC_UL320_.jpg", "price": 64.99, "rating": "4.4", "sales": "1,000+", "asin": "B0HDCT7GN9"}, {"title": "Lufeiya Small Desk with Drawers for Home Office Bedroom, 31 inch Black Writing Study Desks with Fabric Drawers Storage, Gaming Desk Table with Power Outlet & Monitor Stand, Black", "img": "https://m.media-amazon.com/images/I/71YRFnjWIGL._AC_UL320_.jpg", "price": 71.99, "rating": "4.2", "sales": "50+", "asin": "B0CWKRB51K"}, {"title": "LED Desk Lamps for Home Office, Desk Light with Remote & Touch Control, Stepless Dimming,5CCT,Motion Sensor Auto On/Off, Eye-Caring Desk Lamp with Clamp for Study, Reading,Dual Monitors,White", "img": "https://m.media-amazon.com/images/I/71ouoA-JD4L._AC_UL320_.jpg", "price": 59.99, "rating": "4.8", "sales": "50+", "asin": "B0H37P16LH"}, {"title": "SANODESK One-Piece Electric Height Adjustable Standing Desk 40\\'\\'x 24\\'\\'", "img": "https://m.media-amazon.com/images/I/71vqJFcpQQL._AC_UL320_.jpg", "price": 75.97, "rating": "4.3", "sales": "1,000+", "asin": "B0B9BNG9DC"}]};
+
+        let currentTab = 'kitchen';
+
+        function renderProducts(items) {
+            const container = document.getElementById('productContainer');
+            const countHeader = document.getElementById('productCountHeader');
+            container.innerHTML = '';
+            countHeader.innerText = `Showing ${items.length} product(s)`;
+
+            if (items.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 text-sm">No matching products found.</div>`;
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "product-card p-4 rounded-2xl border border-slate-200/80 shadow-sm flex gap-4 items-center relative overflow-hidden";
+                const affLink = `https://www.amazon.com/dp/${item.asin}?tag=${AFFILIATE_TAG}`;
+                
+                card.innerHTML = `
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#FAF8F5] border border-slate-100 flex items-center justify-center overflow-hidden shrink-0 relative">
+                        <img src="${item.img}" alt="${item.title}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-full object-contain p-1.5 hover:scale-105 transition-transform duration-300" 
+                            onerror="this.onerror=null; this.src='https://via.placeholder.com/150/F7F5EE/2B342B?text=Eco-Smart';">
+                    </div>
+
+                    <div class="flex-1 min-w-0 flex flex-col justify-between h-full space-y-1.5">
+                        <div>
+                            <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-md mb-1">⭐ Verified Eco Item</span>
+                            <h3 class="font-bold text-slate-900 text-xs sm:text-sm leading-snug line-clamp-2 hover:text-[#4E8752] transition">${item.title}</h3>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-[11px] text-slate-500">
+                            <span class="flex items-center gap-1 text-amber-500 font-bold">
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 stroke-amber-400"></i> ${item.rating}
+                            </span>
+                            <span class="text-slate-300">•</span>
+                            <span class="text-slate-600 font-medium flex items-center gap-1">
+                                <i data-lucide="shopping-bag" class="w-3 h-3 text-slate-400"></i> ${item.sales}/mo
+                            </span>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-1 border-t border-slate-100 mt-1">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block uppercase font-medium">Est. Price</span>
+                                <span class="text-sm sm:text-base font-extrabold text-[#4E8752]">$${parseFloat(item.price).toFixed(2)}</span>
+                            </div>
+                            
+                            <a href="${affLink}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-1.8 bg-[#4E8752] hover:bg-[#3D6E40] active:scale-95 text-white font-bold text-xs rounded-xl shadow-sm transition-all">
+                                <span>Check Price</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function setTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = "tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all";
+            });
+            document.getElementById(`tab-${tab}`).className = "tab-btn shrink-0 px-4 py-2 rounded-xl font-bold bg-[#4E8752] text-white shadow-md transition-all";
+            filterProducts();
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const items = rawCategories[currentTab] || [];
+            const filtered = items.filter(p => p.title.toLowerCase().includes(query) || p.asin.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        renderProducts(rawCategories['kitchen']);
+    </script>
 </body>
 </html>
