@@ -41,7 +41,7 @@
         <h1 class="text-3xl font-extrabold text-[#2B342B] tracking-tight">Eco-Smart Living</h1>
         <p class="text-sm font-medium text-slate-500 mt-1">Smart Choices • Minimalist & Eco-Friendly Home Solutions</p>
 
-        <!-- Price Fluctuation Notice -->
+        <!-- Price Notice Banner -->
         <div class="mt-4 max-w-2xl mx-auto p-3.5 bg-amber-50/90 border border-amber-200/90 rounded-2xl text-left text-xs text-amber-900 flex items-start gap-3 shadow-sm">
             <i data-lucide="info" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
             <div>
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <!-- Search Bar & Clean Tab Container -->
+        <!-- Search Bar & Category Tabs Container -->
         <div class="mt-6 max-w-2xl mx-auto space-y-3.5">
             <div class="relative">
                 <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search products, keywords (e.g. Bamboo, Desk)..." 
@@ -57,7 +57,7 @@
                 <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5"></i>
             </div>
             
-            <!-- Category Tabs Container -->
+            <!-- Category Tabs Navigation -->
             <div id="tabsWrapper" class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto text-xs no-scrollbar py-2 px-2 max-w-full rounded-2xl bg-[#EBE7DC]/60 border border-slate-200/50">
                 <button onclick="setTab('kitchen')" id="tab-kitchen" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-bold bg-[#4E8752] text-white shadow-md">Eco Kitchen (20)</button>
                 <button onclick="setTab('workspace')" id="tab-workspace" class="tab-btn shrink-0 px-4 py-2 rounded-xl font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Smart Workspace (20)</button>
@@ -80,121 +80,21 @@
     <script>
         const AFFILIATE_TAG = "ecosmart0f5-20";
 
-        // Full dataset extracted directly from 'Link Sp amazon.xlsx'
-        const rawCategories = {
-            kitchen: [
-                { title: 'Lipper International Bamboo Wood Utensil Holder Storage Box', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0CBNHRQSZ', img: 'https://m.media-amazon.com/images/I/81He6cv-01L._AC_UL320_.jpg' },
-                { title: 'Set of 6 Bamboo Drawer Organizer Storage Box, Adjustable Cutlery Organizer', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B097P34VB9', img: 'https://m.media-amazon.com/images/I/71ZbayiVa9L._AC_UL320_.jpg' },
-                { title: 'SpaceAid Bamboo Drawer Dividers with Inserts and Labels, Kitchen Adjustable', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B094624Q8Z', img: 'https://m.media-amazon.com/images/I/71TDazJeZHL._AC_UL320_.jpg' },
-                { title: 'VaeFae 6-Pack Adjustable Bamboo Drawer Dividers, Expandable Organizer', price: 24.99, rating: '4.5', sales: '26+', asin: 'B08B397DMF', img: 'https://m.media-amazon.com/images/I/81PF3AQ2u5L._AC_UL320_.jpg' },
-                { title: 'Lipper International 8180S Bamboo Wood Stacking Drawer Organizer Box', price: 24.99, rating: '4.5', sales: '26+', asin: 'B000QWFOLC', img: 'https://m.media-amazon.com/images/I/81KOB8pry3S._AC_UL320_.jpg' },
-                { title: 'Kitchen Drawer Organizer Bins, Stackable Bamboo Deep Drawer Organizer', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0CH9MWZBH', img: 'https://m.media-amazon.com/images/I/81AftLgyLyL._AC_UL320_.jpg' },
-                { title: '2 Pack Bamboo Food Pantry Organizers, 4 Section', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0GY49523Q', img: 'https://m.media-amazon.com/images/I/71CHiWvc-KL._AC_UL320_.jpg' },
-                { title: 'Lipper International 8385 Bamboo Wood Stacking Drawer Organizer', price: 24.99, rating: '4.5', sales: '26+', asin: 'B079Y8B87R', img: 'https://m.media-amazon.com/images/I/718NA4cHW7L._AC_UL320_.jpg' },
-                { title: 'SpaceAid Bamboo Pull Out Spice Rack Organizer for Cabinet', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0F8NGPH76', img: 'https://m.media-amazon.com/images/I/71qVkT+f1DL._AC_UL320_.jpg' },
-                { title: 'mHomeAid Bag Storage Organizer - Bamboo Food Plastic Baggie Holder', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0DPFCQ2P9', img: 'https://m.media-amazon.com/images/I/71KAnhQjvTL._AC_UL320_.jpg' },
-                { title: '5-Piece Bamboo Drawer Organizer Storage Boxes Kitchen Multi-Use', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0GKMGGG2G', img: 'https://m.media-amazon.com/images/I/716ZcbMFg-L._AC_UL320_.jpg' },
-                { title: 'Simple Trending Bamboo Cabinet Organizer Shelf, Set of 2 Kitchen Counter', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0G4Z39LNJ', img: 'https://m.media-amazon.com/images/I/61W0YZmHQ7L._AC_UL320_.jpg' },
-                { title: 'SpaceAid WrapNeat 3 in 1 Wrap Organizer with Cutter and Labels', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B09FPFTMVX', img: 'https://m.media-amazon.com/images/I/71a+-ANxPwL._AC_UL320_.jpg' },
-                { title: '2 Set Large Stackable Wire Basket with Bamboo Tops & Tag - Pantry Storage', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0D83ZR4D6', img: 'https://m.media-amazon.com/images/I/81YQk2FUjYL._AC_UL320_.jpg' },
-                { title: 'Utoplike 4 Pcs Bamboo Kitchen Drawer Dividers, Large Drawers Divider', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B07HQMZ7HH', img: 'https://m.media-amazon.com/images/I/71LrbpWCJiL._AC_UL320_.jpg' },
-                { title: '4 Pcs Bamboo Wooden Dish Rack, Plate Organizer for Cabinet Storage', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0DZT9TLQK', img: 'https://m.media-amazon.com/images/I/61V3EAVezzL._AC_UL320_.jpg' },
-                { title: 'Lazy Susan Organizer Homerays 9 Inch Non-Skid Bamboo Lazy Susan Turntable', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0BNVG6QMF', img: 'https://m.media-amazon.com/images/I/71h7b3sPU-L._AC_UL320_.jpg' },
-                { title: 'Kootek 8Pcs Bamboo Drawer Organizer 4-Size Kitchen Storage Bins', price: 24.99, rating: '4.5', sales: '26+', asin: 'B08LQJL4GY', img: 'https://m.media-amazon.com/images/I/71KJiywQKvL._AC_UL320_.jpg' },
-                { title: 'Greenual Bamboo Dish Drying Rack with Utensil Holder, 3 Tier Collapsible', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0CF7YBB5N', img: 'https://m.media-amazon.com/images/I/71aR6Cw8HhL._AC_UL320_.jpg' },
-                { title: 'Swedish Dishcloth 10 Pack, Reusable Washable Paper Towels', price: 12.59, rating: '4.5', sales: '1,000+', asin: 'B0GVF9HP1Y', img: 'https://m.media-amazon.com/images/I/71EuawmmhIL._AC_UL320_.jpg' }
-            ],
-            workspace: [
-                { title: 'Claiks Electric Standing Desk, 32x19 Inch, Black', price: 59.98, rating: '4.2', sales: '600+', asin: 'B0H45TV33J', img: 'https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg' },
-                { title: '55 X 20 Inch Computer Desk, Power Outlets, USB-C, Rustic Brown', price: 67.46, rating: '4.6', sales: '300+', asin: 'B0FZ566DBT', img: 'https://m.media-amazon.com/images/I/81vkmfK0hXL._AC_UL320_.jpg' },
-                { title: 'YIHAYO Electric Standing Desk, 48 x 24 Inches Stand Up Desk', price: 89.99, rating: '4.5', sales: '500+', asin: 'B0CY7X73Z6', img: 'https://m.media-amazon.com/images/I/71MgPlTkWeL._AC_UL320_.jpg' },
-                { title: 'DUMOS 32 Inch Small Computer Desk, Gaming Desks for Home Office', price: 19.99, rating: '4.5', sales: '7K+', asin: 'B0GYPQ75WH', img: 'https://m.media-amazon.com/images/I/71rL0QguLAL._AC_UL320_.jpg' },
-                { title: 'DUMOS 47" L Shaped Computer Desk, Corner Desks with Storage Shelves', price: 41.99, rating: '4.4', sales: '200+', asin: 'B0HB4S9T61', img: 'https://m.media-amazon.com/images/I/71G7gJY5FYL._AC_UL320_.jpg' },
-                { title: 'Huuger Folding Desk for Small Spaces, 31.5 Inch Foldable Computer Table', price: 56.99, rating: '4.4', sales: '1K+', asin: 'B0F43TL3GT', img: 'https://m.media-amazon.com/images/I/815LJYab8mL._AC_UL320_.jpg' },
-                { title: 'Motumen Led Desk Lamp for Home Office, Eye-Care Desk Light Clamp', price: 21.99, rating: '4.6', sales: '2K+', asin: 'B0D4DG2CG2', img: 'https://m.media-amazon.com/images/I/71CyRyEBOKL._AC_UL320_.jpg' },
-                { title: 'Led Desk Lamp for Office Home - Dual Screen Computer Monitor Work Light', price: 49.99, rating: '4.6', sales: '3K+', asin: 'B0BRCJL4MM', img: 'https://m.media-amazon.com/images/I/616md8tdywL._AC_UL320_.jpg' },
-                { title: 'Led Desk Lamp with Clamp, Architect Desk Lamp for Home Office', price: 49.99, rating: '4.6', sales: '2K+', asin: 'B0BNHNG5CY', img: 'https://m.media-amazon.com/images/I/81f0B2GPxyL._AC_UL320_.jpg' },
-                { title: 'HUANUO 32" X 21" Electric Standing Desk with 2 Drawers', price: 89.98, rating: '4.6', sales: '500+', asin: 'B0G5MW8SKH', img: 'https://m.media-amazon.com/images/I/61KiSzFRt4L._AC_UL320_.jpg' },
-                { title: 'Gaming Desk Computer Writing Table Student Art Modren Simple Style PC Wood', price: 80.99, rating: '4.5', sales: '1,000+', asin: 'B0GWHY7R4P', img: 'https://m.media-amazon.com/images/I/81o00URoZKL._AC_UL320_.jpg' },
-                { title: 'Agilestic 26*16 Inch Height Adjustable Electric Standing Desk', price: 79.99, rating: '4.2', sales: '1,000+', asin: 'B0DY1FM258', img: 'https://m.media-amazon.com/images/I/71wscARk+5L._AC_UL320_.jpg' },
-                { title: 'Lufeiya Black Gaming Desk with LED Lights and Power Outlets, 40 Inch', price: 66.49, rating: '4.4', sales: '1K+', asin: 'B0D4PCD2PX', img: 'https://m.media-amazon.com/images/I/71RSaS6bBCL._AC_UL320_.jpg' },
-                { title: 'Lufeiya Gaming Desk with Fabric Drawers, 47 Inch Computer Desk', price: 69.99, rating: '4.5', sales: '400+', asin: 'B0DKHW5KR5', img: 'https://m.media-amazon.com/images/I/71-cYSzsWEL._AC_UL320_.jpg' },
-                { title: 'Small Standing Desk with Storage, Height Adjustable Sit Stand Desk', price: 68.99, rating: '4.4', sales: '400+', asin: 'B0H2YL1BYX', img: 'https://m.media-amazon.com/images/I/81DSuefhptL._AC_UL320_.jpg' },
-                { title: 'OLIXIS 39 Inch L Shaped Desk, Corner Computer Gaming Desks', price: 41.99, rating: '4.6', sales: '1,000+', asin: 'B0H9FRLPWW', img: 'https://m.media-amazon.com/images/I/71evkKteXJL._AC_UL320_.jpg' },
-                { title: 'Small Portable Rolling Standing Desk - 32 Inch Adjustable Mobile', price: 75.99, rating: '4.5', sales: '800+', asin: 'B0DSL5LM22', img: 'https://m.media-amazon.com/images/I/71CpoWvferL._AC_UL320_.jpg' },
-                { title: 'Sweetcrispy Electric Standing Desk, Computer Desk, 48x24 Inch', price: 79.99, rating: '4.2', sales: '1,000+', asin: 'B0FJRS8BDN', img: 'https://m.media-amazon.com/images/I/71GWwHisDvL._AC_UL320_.jpg' },
-                { title: 'Limitless TotalDesk Portable Modern Workstation and Lap Desk', price: 42.00, rating: '4.4', sales: '200+', asin: 'B09W44JQML', img: 'https://m.media-amazon.com/images/I/51-eh899k1L._AC_UL320_.jpg' },
-                { title: 'VASAGLE Electric Standing Desk, Height Adjustable, 47.2 x 23.6 Inches', price: 87.87, rating: '4.2', sales: '1,000+', asin: 'B0FSKWQH4Q', img: 'https://m.media-amazon.com/images/I/71oVjGOog9L._AC_UL320_.jpg' }
-            ],
-            closet: [
-                { title: '2‑Tier Bamboo Coffee Bar Organizer, Countertop Display Stand Shelf', price: 24.99, rating: '4.5', sales: '26+', asin: 'B0FKTK1D98', img: 'https://m.media-amazon.com/images/I/81iA-GbI8UL._AC_UL320_.jpg' },
-                { title: 'HOUSE DAY Space Saving Hanger Hooks 60 Pack, Clothes Hanger Connector', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0C53MD1MS', img: 'https://m.media-amazon.com/images/I/71+6Fh9qz5L._AC_UL320_.jpg' },
-                { title: 'Pants Hangers Space Saving - 2 Pack Closet Organizer and Storage', price: 0.00, rating: '4.5', sales: '1,000+', asin: 'B0CYX497CJ', img: 'https://m.media-amazon.com/images/I/81q1FgNPy7L._AC_UL320_.jpg' },
-                { title: 'Upgraded Closet Organizers and Storage, Stackable Closet Organizer Basket', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0CGJJJC4M', img: 'https://m.media-amazon.com/images/I/71qU0gkBTYL._AC_UL320_.jpg' },
-                { title: 'NECAMOCU 2 Pack Bra Hanger for Closet Organizer, Premium Tank Top Hangers', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0DQ67STGL', img: 'https://m.media-amazon.com/images/I/710f-GufFYL._AC_UL320_.jpg' },
-                { title: 'Tank Top Hanger with 40 Hooks for Closet Organizer, Premium Wood Bra Hanger', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0C9ZY4XD6', img: 'https://m.media-amazon.com/images/I/71LqRROpYyL._AC_UL320_.jpg' },
-                { title: 'Mr. Pen- Bulk Space Saving Hangers for Clothes, 24 pcs, Plastic', price: 0.00, rating: '4.5', sales: '1,000+', asin: 'B0DBQ67SK4', img: 'https://m.media-amazon.com/images/I/81miIn9t1qL._AC_UL320_.jpg' },
-                { title: 'Utopia Home Space Saving Hangers 10 Pack – Magic Hanger Collapsible', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0GH7WTDRT', img: 'https://m.media-amazon.com/images/I/81Co9YVBWgL._AC_UL320_.jpg' },
-                { title: 'Metal Tank Top Hanger 2 Pack, 360° Swivel Closet Organizers', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0CS6M7Z71', img: 'https://m.media-amazon.com/images/I/71+JXxNmkVL._AC_UL320_.jpg' },
-                { title: 'Space Saving Hangers for 48 Clothes, Reinforced Collapsible Hangers', price: 0.00, rating: '4.5', sales: '1,000+', asin: 'B0DWXNTWVP', img: 'https://m.media-amazon.com/images/I/71SWuFDVllL._AC_UL320_.jpg' },
-                { title: 'BOOMIBOO Hanging Closet Organize and Shelves, 5-Hanging Shelf', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0DHMJSDXM', img: 'https://m.media-amazon.com/images/I/71WIkiANaxL._AC_UL320_.jpg' },
-                { title: 'HOUSE DAY White Magic Space Saving Hangers, Premium Smart Hanger', price: 0.00, rating: '4.5', sales: '1,000+', asin: 'B07QWPHX8G', img: 'https://m.media-amazon.com/images/I/71efg28lwyL._AC_UL320_.jpg' },
-                { title: 'FeeraHozer Pants Hangers Non Slip 3 Pack Space Saving Hangers', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B086J3WT37', img: 'https://m.media-amazon.com/images/I/71VRvXdjrKL._AC_UL320_.jpg' },
-                { title: 'Tall Dresser 44"H with Hanging Rack, 4 Drawers Small Closet Dresser', price: 0.00, rating: '4.5', sales: '1,000+', asin: 'B0DK1FP7LF', img: 'https://m.media-amazon.com/images/I/81lTxUihoML._AC_UL320_.jpg' },
-                { title: '4 Pack Stackable Closet Storage Basket - Stackable Storage Bins', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0CHVKCWS7', img: 'https://m.media-amazon.com/images/I/71aQjzoLLkL._AC_UL320_.jpg' },
-                { title: 'Clothes Rack Clothing Rack with Shelves & Wheels Multi-Functional Wardrobe', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0DZXJ1F5L', img: 'https://m.media-amazon.com/images/I/81EBRgxU35L._AC_UL320_.jpg' },
-                { title: '360-Degree Rotating Multi-Hook Hanger - Space-Saving Organizer', price: 360.00, rating: '4.5', sales: '1,000+', asin: 'B0H2Z57XXZ', img: 'https://m.media-amazon.com/images/I/61KyL41z1pL._AC_UL320_.jpg' },
-                { title: 'Legging Hangers for Closet Organizer, Hat Hangers for Closet 2 Pack', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0DX71B5LT', img: 'https://m.media-amazon.com/images/I/71pkPzh-IyL._AC_UL320_.jpg' },
-                { title: '2 Pack Tank Top Hanger Space Saving, 360° Rotating Closet Organizers', price: 0.00, rating: '4.5', sales: '1,000+', asin: 'B0FFY357RW', img: 'https://m.media-amazon.com/images/I/71qsDDSVLEL._AC_UL320_.jpg' },
-                { title: 'Velvet Pants Hangers Space Saving, 2-Pack Multi-Tier Closet Organizers', price: 24.99, rating: '4.5', sales: '1,000+', asin: 'B0CPPF1RTD', img: 'https://m.media-amazon.com/images/I/71e1b+XTObL._AC_UL320_.jpg' }
-            ],
-            cleaning: [
-                { title: 'Rolling Computer Desk, 31.5 Inch Small Desks For Small Space', price: 79.17, rating: '4.2', sales: '1,000+', asin: 'B0FB82W4F6', img: 'https://m.media-amazon.com/images/I/71TWXYC0rHL._AC_UL320_.jpg' },
-                { title: 'Pamray 47 Inch Reversible L Shaped Gaming Desk Corner Computer Desk', price: 59.98, rating: '4.1', sales: '800+', asin: 'B0GKRTGRRK', img: 'https://m.media-amazon.com/images/I/81PRz1dHuUL._AC_UL320_.jpg' },
-                { title: '39.4 Inch Computer Office Desk with Power Outelts and USB-C Port', price: 69.99, rating: '4.3', sales: '50+', asin: 'B0GXYGJK7Z', img: 'https://m.media-amazon.com/images/I/71Ucc4Qv7hL._AC_UL320_.jpg' },
-                { title: 'Agilestic 48*24 Inch Height Adjustable Electric Standing Desk', price: 89.99, rating: '4.5', sales: '1K+', asin: 'B0CSPJR8W8', img: 'https://m.media-amazon.com/images/I/71fSeXNXQPL._AC_UL320_.jpg' },
-                { title: 'DUMOS 48 Inch Electric Standing Desk, Memory Adjustable Home Office', price: 78.93, rating: '4.2', sales: '400+', asin: 'B0G3WZ7H6T', img: 'https://m.media-amazon.com/images/I/71GVWo-3wdL._AC_UL320_.jpg' },
-                { title: 'snsok Smart Desk Lamp with Dual USB Charging & 2 AC Outlets', price: 39.79, rating: '4.6', sales: '1,000+', asin: 'B0FKN2N82F', img: 'https://m.media-amazon.com/images/I/61wCdSh7MOL._AC_UL320_.jpg' },
-                { title: 'Desk Organizers and Accessories, Dual Monitor Stand Riser with Drawer', price: 24.29, rating: '4.6', sales: '4K+', asin: 'B0F5PPDTVR', img: 'https://m.media-amazon.com/images/I/71vIgL35wZL._AC_UL320_.jpg' },
-                { title: 'Desk Lamp with Wireless Charger: USB Charging Port, Table Lamp', price: 24.69, rating: '4.4', sales: '1K+', asin: 'B08BL9DWXJ', img: 'https://m.media-amazon.com/images/I/71Lg-bVp8JL._AC_UL320_.jpg' },
-                { title: 'deeloop LED Desk Lamp, CRI95+ Eye-Care Light, Auto Dimming, Clamp', price: 59.99, rating: '4.7', sales: '1,000+', asin: 'B0DQWQ3HS2', img: 'https://m.media-amazon.com/images/I/61SPzTn4RxL._AC_UL320_.jpg' },
-                { title: 'Claiks 48 x 24 Inch White Electric Standing Desk', price: 89.98, rating: '4.2', sales: '50+', asin: 'B0H44BHLVX', img: 'https://m.media-amazon.com/images/I/61KhMuJOgtL._AC_UL320_.jpg' },
-                { title: 'Clamp on Mouse Platform, Clip on Mouse Pad, Rotating 360', price: 26.99, rating: '4.3', sales: '200+', asin: 'B072JLB1DP', img: 'https://m.media-amazon.com/images/I/81zcLxrucrL._AC_UL320_.jpg' },
-                { title: 'Lufeiya White Computer Desk with LED Lights and Power Outlets', price: 74.98, rating: '4.4', sales: '200+', asin: 'B0D4PB95R8', img: 'https://m.media-amazon.com/images/I/61PBRkuz3CL._AC_UL320_.jpg' },
-                { title: 'Desk Organizer with Cup & Headphone Holder, Clamp-On', price: 15.99, rating: '4.6', sales: '1,000+', asin: 'B09MDW5V38', img: 'https://m.media-amazon.com/images/I/61t4FCLsZ4L._AC_UL320_.jpg' },
-                { title: 'HOOBRO Computer Desk, 31.5 Inch Small Desk with Power Outlet', price: 49.99, rating: '4.5', sales: '200+', asin: 'B0BNNBJPMH', img: 'https://m.media-amazon.com/images/I/71di4f+RiML._AC_UL320_.jpg' },
-                { title: 'Govee Smart Light Bar, RGBICWW TV Lights for Living Room, Gaming', price: 39.99, rating: '4.6', sales: '5K+', asin: 'B096WZXKZP', img: 'https://m.media-amazon.com/images/I/71VYYSAObdL._AC_UL320_.jpg' },
-                { title: 'Desk Organizer with Wireless Charger, Digital Clock, Thermometer', price: 37.99, rating: '4.2', sales: '1,000+', asin: 'B09CSYNVCD', img: 'https://m.media-amazon.com/images/I/91wmMTevBZL._AC_UL320_.jpg' },
-                { title: 'HOOBRO Small Computer Desk, 28.3" Desk for Small Spaces, Office Desk', price: 62.99, rating: '4.6', sales: '1,000+', asin: 'B0GL1ZNM2Q', img: 'https://m.media-amazon.com/images/I/61vlSo8ggBL._AC_UL320_.jpg' },
-                { title: 'IHAO Smart LED Desk Lamp with Wireless Charger & Bluetooth Speaker', price: 41.71, rating: '4.5', sales: '1,000+', asin: 'B0GCZJ3MTK', img: 'https://m.media-amazon.com/images/I/61U9qqyO86L._AC_UL320_.jpg' },
-                { title: 'Desk Organizer and Accessories, 2-Tier Computer Monitor Stand', price: 23.99, rating: '4.5', sales: '200+', asin: 'B0F9LKWRJZ', img: 'https://m.media-amazon.com/images/I/71TStawrUIL._AC_UL320_.jpg' },
-                { title: 'Small Folding Computer Desk – Portable 35.8 Inch Foldable Laptop Table', price: 49.93, rating: '4.6', sales: '800+', asin: 'B0DWMZTJBV', img: 'https://m.media-amazon.com/images/I/61tlIk4ZPJL._AC_UL320_.jpg' }
-            ],
-            storage: [
-                { title: 'Qtip Holder Dispenser with Bamboo Lids - 10 oz Clear Plastic Jar', price: 24.99, rating: '4.5', sales: '26+', asin: 'B09KLPLCRF', img: 'https://m.media-amazon.com/images/I/814n4DwmYxL._AC_UL320_.jpg' },
-                { title: 'DUMOS 40-Inch Gaming Computer Desk with Drawers for Home Office', price: 64.99, rating: '4.4', sales: '1,000+', asin: 'B0HDCT7GN9', img: 'https://m.media-amazon.com/images/I/71f61vwCqzL._AC_UL320_.jpg' },
-                { title: 'Lufeiya Small Desk with Drawers for Home Office Bedroom, 31 inch', price: 71.99, rating: '4.2', sales: '50+', asin: 'B0CWKRB51K', img: 'https://m.media-amazon.com/images/I/71YRFnjWIGL._AC_UL320_.jpg' },
-                { title: 'LED Desk Lamps for Home Office, Desk Light with Remote & Touch Control', price: 59.99, rating: '4.8', sales: '50+', asin: 'B0H37P16LH', img: 'https://m.media-amazon.com/images/I/71ouoA-JD4L._AC_UL320_.jpg' },
-                { title: 'SANODESK One-Piece Electric Height Adjustable Standing Desk 40"x 24"', price: 75.97, rating: '4.3', sales: '1,000+', asin: 'B0B9BNG9DC', img: 'https://m.media-amazon.com/images/I/71vqJFcpQQL._AC_UL320_.jpg' },
-                { title: 'Under Bed Rolling Storage Bins with Wheels (2 Pack)', price: 34.99, rating: '4.5', sales: '4,000+', asin: 'B0B83M2L11', img: 'https://m.media-amazon.com/images/I/71yI0y3M-5L._AC_UL320_.jpg' },
-                { title: 'Woven Seagrass Storage Baskets with Handles (3 Pack)', price: 29.99, rating: '4.6', sales: '3,000+', asin: 'B08R2S1M45', img: 'https://m.media-amazon.com/images/I/71X8k+m03yL._AC_UL320_.jpg' },
-                { title: 'Bamboo Floating Wall Shelves Set of 3 for Home Decor', price: 21.99, rating: '4.5', sales: '5,000+', asin: 'B088R2M3S1', img: 'https://m.media-amazon.com/images/I/81L8y1D0dAL._AC_UL320_.jpg' },
-                { title: 'Clear Plastic Lazy Susan Turntable Organizer 10 Inch Container', price: 13.99, rating: '4.7', sales: '10,000+', asin: 'B07R4M1S23', img: 'https://m.media-amazon.com/images/I/81x1e0+WpIL._AC_UL320_.jpg' },
-                { title: 'Collapsible Storage Bins Crates Stacking Storage Bins', price: 25.99, rating: '4.5', sales: '2,000+', asin: 'B09J2M3S45', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' },
-                { title: 'Bamboo Entryway Shoe Rack Bench 3-Tier Organizer Shelf', price: 38.99, rating: '4.6', sales: '3,000+', asin: 'B07B4M1S88', img: 'https://m.media-amazon.com/images/I/81e5k7D31yL._AC_UL320_.jpg' },
-                { title: 'Over The Door Storage Organizer 5 Pocket Hanging Caddy Shelf', price: 19.99, rating: '4.5', sales: '6,000+', asin: 'B08M2S3L41', img: 'https://m.media-amazon.com/images/I/81K9k+1s0mL._AC_UL320_.jpg' },
-                { title: 'Natural Cotton Rope Storage Basket Large Laundry Bin Tote', price: 22.99, rating: '4.8', sales: '8,000+', asin: 'B07M2S1L99', img: 'https://m.media-amazon.com/images/I/71q8x+2N9xL._AC_UL320_.jpg' },
-                { title: 'Clear Acrylic Stackable Storage Drawers Bins (4 Pack)', price: 27.99, rating: '4.6', sales: '4,000+', asin: 'B09R3M1S22', img: 'https://m.media-amazon.com/images/I/81v7d3S09yL._AC_UL320_.jpg' },
-                { title: 'Bamboo Key Holder for Wall Decor with Mail Shelf Organizer', price: 14.99, rating: '4.6', sales: '3,000+', asin: 'B088R1M2L2', img: 'https://m.media-amazon.com/images/I/71v1m2S341L._AC_UL320_.jpg' },
-                { title: 'Slim Rolling Utility Storage Cart 4-Tier Mobile Tower Shelves', price: 21.99, rating: '4.4', sales: '7,000+', asin: 'B08M3S1L55', img: 'https://m.media-amazon.com/images/I/81M1y2S341L._AC_UL320_.jpg' },
-                { title: 'Wire Metal Storage Baskets with Wooden Handles (2 Pack)', price: 19.99, rating: '4.7', sales: '5,000+', asin: 'B08R4M2S11', img: 'https://m.media-amazon.com/images/I/71w1y2S341L._AC_UL320_.jpg' },
-                { title: 'Bamboo Coat Rack Stand Tree 8 Hooks Heavy Duty Standing Rack', price: 26.99, rating: '4.5', sales: '2,000+', asin: 'B07M1S2L88', img: 'https://m.media-amazon.com/images/I/71g1xTbudOL._AC_UL320_.jpg' },
-                { title: 'Fabric Foldable Storage Baskets Boxes with Handles (3 Pack)', price: 16.99, rating: '4.6', sales: '6,000+', asin: 'B08R1M3S22', img: 'https://m.media-amazon.com/images/I/81g1xTbudOL._AC_UL320_.jpg' },
-                { title: 'Under Sink Organizer 2-Tier Pull Out Cabinet Shelf Rack', price: 23.99, rating: '4.5', sales: '12,000+', asin: 'B09M2S4L11', img: 'https://m.media-amazon.com/images/I/71M2g7d6bJL._AC_UL320_.jpg' }
-            ]
-        };
-
-        let currentTab = 'kitchen';
+        // Multi-level image URL resolver & clean fallback
+        function handleImgError(imgElement, secondaryUrl, title) {
+            if (imgElement.getAttribute('data-tried-secondary') !== 'true' && secondaryUrl && secondaryUrl.startsWith('http')) {
+                imgElement.setAttribute('data-tried-secondary', 'true');
+                imgElement.src = secondaryUrl;
+            } else {
+                imgElement.onerror = null;
+                const parent = imgElement.parentElement;
+                parent.innerHTML = `<div class="w-full h-full bg-[#EBE7DC]/60 flex flex-col items-center justify-center text-center p-2 text-slate-400">
+                    <i data-lucide="package" class="w-8 h-8 text-[#4E8752] mb-1"></i>
+                    <span class="text-[10px] font-semibold text-slate-500 line-clamp-1">${title.split(' ')[0]}</span>
+                </div>`;
+                lucide.createIcons();
+            }
+        }
 
         function renderProducts(items) {
             const container = document.getElementById('productContainer');
@@ -214,8 +114,8 @@
                 
                 card.innerHTML = `
                     <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl bg-[#FAF8F5] border border-slate-100 flex items-center justify-center overflow-hidden shrink-0 relative">
-                        <img src="${item.img}" alt="${item.title}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-full object-contain p-1.5 hover:scale-105 transition-transform duration-300" 
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/150/F7F5EE/2B342B?text=Eco-Smart';">
+                        <img src="${item.img_primary}" alt="${item.title}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-full object-contain p-1.5 hover:scale-105 transition-transform duration-300" 
+                            onerror="handleImgError(this, '${item.img_secondary}', '${item.title.replace(/'/g, "")}')">
                     </div>
 
                     <div class="flex-1 min-w-0 flex flex-col justify-between h-full space-y-1.5">
@@ -252,6 +152,7 @@
             lucide.createIcons();
         }
 
+        // Search & Tab Functions
         function setTab(tab) {
             currentTab = tab;
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -268,7 +169,7 @@
             renderProducts(filtered);
         }
 
-        // Mouse drag scrolling for tabs on Desktop PC
+        // Mouse drag scrolling for tabs on PC
         const slider = document.getElementById('tabsWrapper');
         let isDown = false, startX, scrollLeft;
         slider.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
@@ -281,7 +182,7 @@
             slider.scrollLeft = scrollLeft - (x - startX) * 2;
         });
 
-        // Initial Render (Eco Kitchen Tab)
+        // Initial Render
         renderProducts(rawCategories['kitchen']);
     </script>
 </body>
